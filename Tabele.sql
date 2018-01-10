@@ -78,7 +78,7 @@ CREATE TABLE Subcategory (
 
 
 CREATE TABLE ProductCategory (
-	ID INT,
+	ID INT AUTO_INCREMENT,
     ProductID INT,
     SubcategoryID INT,
     PRIMARY KEY (ID),
@@ -86,3 +86,18 @@ CREATE TABLE ProductCategory (
     FOREIGN KEY (SubcategoryID) REFERENCES Subcategory (ID)
 );
     
+CREATE TABLE Attributes (
+	ID INT AUTO_INCREMENT,
+	Name VARCHAR(30) NOT NULL,
+    Value VARCHAR(50) NOT NULL,
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE ProductAttribute (
+	ID INT AUTO_INCREMENT,
+    ProductID INT,
+    AttributeID INT,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (ProductID) REFERENCES Product (ID),
+    FOREIGN KEY (AttributeID) REFERENCES Attributes (ID)
+);
