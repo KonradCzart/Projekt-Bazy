@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 public class MyAnnouncementsWindowController {
 	@FXML
 	private Button settingsButton;
+	
+	@FXML
+	private Button mainPageButton;
 
 	@FXML
 	private void settingsButtonActivated(ActionEvent event) {
@@ -30,5 +33,23 @@ public class MyAnnouncementsWindowController {
 		// loader.<SignInOrRegisterController>getController();
 		stage.show();
 
+	}
+	
+	@FXML
+	private void mainPageButtonActivated(ActionEvent event) {
+		Stage stage = (Stage) settingsButton.getScene().getWindow();
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+
+		try {
+			Scene scene = new Scene((Pane) loader.load());
+			stage.setScene(scene);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// SignInOrRegisterController controller =
+		// loader.<SignInOrRegisterController>getController();
+		stage.show();
 	}
 }
