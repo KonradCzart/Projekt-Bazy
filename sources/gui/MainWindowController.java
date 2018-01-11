@@ -1,3 +1,4 @@
+package gui;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -61,6 +62,13 @@ public class MainWindowController {
 	ArrayList<String> getCondition() {
 		return new ArrayList<String>(Arrays.asList("nowy", "u¿ywany", "dowolny"));
 	}
+	
+	ArrayList<String> getCarMakes(String subcategory) {
+		return new ArrayList<String>(Arrays.asList("Audi", "BMW", "Chevrolet", "Citroën", "Dacia", "Daewoo", "Fiat",
+				"Ford", "Honda", "Hyundai", "Mazda", "Mercedes", "Mitsubishi", "Nissan", "Opel", "Peugeot", "Renault",
+				"Skoda", "Suzuki", "Toyota", "Volkswagen", "Pozosta³e"));
+	}
+	
 	
 	@FXML
 	private void initialize() {

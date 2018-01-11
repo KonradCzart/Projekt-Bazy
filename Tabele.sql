@@ -47,6 +47,7 @@ CREATE TABLE Product (
 
 CREATE TABLE Announcements (
 	ID INT NOT NULL AUTO_INCREMENT,
+    Title VARCHAR(30) NOT NULL,
     ProductID INT,
     UserName VARCHAR(30),
     Location VARCHAR(30),

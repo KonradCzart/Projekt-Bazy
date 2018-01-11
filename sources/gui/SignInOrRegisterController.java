@@ -1,3 +1,4 @@
+package gui;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -8,16 +9,20 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class MySettingsWindowController {
+public class SignInOrRegisterController {
+	
 	@FXML
-	private Button announcementsButton;
+	private Button registerButton;
+	
+	@FXML
+	private Button logMeInButton;
 
 	@FXML
-	void announcementsButtonActivated(ActionEvent event) {
+	void handleRegisterAction(ActionEvent event) {
 
-		Stage stage = (Stage) announcementsButton.getScene().getWindow();
+		Stage stage = (Stage) registerButton.getScene().getWindow();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("MyAnnouncementsWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("SignInOrRegisterWindow2.fxml"));
 
 		try {
 			Scene scene = new Scene((Pane) loader.load());
@@ -33,10 +38,11 @@ public class MySettingsWindowController {
 	}
 	
 	@FXML
-	private void mainPageButtonActivated(ActionEvent event) {
-		Stage stage = (Stage) announcementsButton.getScene().getWindow();
+	private void logMeInButtonActivated(ActionEvent event) {
+		Window.isLoggedIn = true;
+		Stage stage = (Stage) registerButton.getScene().getWindow();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("MyAnnouncementsWindow.fxml"));
 
 		try {
 			Scene scene = new Scene((Pane) loader.load());
@@ -49,4 +55,5 @@ public class MySettingsWindowController {
 		// loader.<SignInOrRegisterController>getController();
 		stage.show();
 	}
+
 }
