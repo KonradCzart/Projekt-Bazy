@@ -15,7 +15,7 @@ public class DataBaseConnection
 	private Connection myConnection;
 	private Boolean isConnection;
 	private RowSetFactory factory;
-	
+	private static final String DEFAULT_URL = "jdbc:mysql://localhost:3306/czaki";
 	public DataBaseConnection(String url, String username, String password)
 	{
 		this.url = url;
@@ -23,7 +23,13 @@ public class DataBaseConnection
 		this.password = password;
 		isConnection = false;
 	}
-
+	public DataBaseConnection(String username, String password)
+	{
+		this.url = DEFAULT_URL;
+		this.username = username;
+		this.password = password;
+		isConnection = false;
+	}
 	public Boolean startConnection()
 	{
 		try {

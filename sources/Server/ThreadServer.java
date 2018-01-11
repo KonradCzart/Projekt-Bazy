@@ -6,7 +6,7 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-
+import DataBase.DataBaseConnection;
 import Message.*;
 
 /** 
@@ -22,9 +22,15 @@ public class ThreadServer implements Runnable {
 
 	private static final int DEFAULT_PORT = 8189;
 	private static final String DEFAULT_HOSTNAME = "localhost";
+	
+	private DataBaseConnection adminConnection;
+	private DataBaseConnection userConnection;
 
 	private ThreadServer()
 	{
+		adminConnection = new DataBaseConnection("admin", "admin123");
+		userConnection = new DataBaseConnection("user", "user12345");
+		
 		client = new ArrayList<ClientHandler>();
 		hostname = DEFAULT_HOSTNAME;
 		port = DEFAULT_PORT;
@@ -40,6 +46,8 @@ public class ThreadServer implements Runnable {
 				this.port = DEFAULT_PORT;
 
 		client = new ArrayList<ClientHandler>();
+		adminConnection = new DataBaseConnection("admin", "admin123");
+		userConnection = new DataBaseConnection("user", "user12345");
 	}
 
 	/**
@@ -74,8 +82,16 @@ public class ThreadServer implements Runnable {
 	{
 		return serverRun;
 	}
-
-
+	
+	/**
+	 * close connection with database
+	 */
+	public void closeDataBaseConnection()
+	{
+		adminConnection.closeConnection();
+		userConnection.closeConnection();
+	}
+	
 	public int getPort() {
 		return port;
 	}
