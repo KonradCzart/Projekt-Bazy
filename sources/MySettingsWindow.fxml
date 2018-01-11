@@ -20,8 +20,8 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="385.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="729.0" minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="385.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="729.0" minHeight="10.0" prefHeight="257.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="729.0" minHeight="10.0" prefHeight="471.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
@@ -37,6 +37,7 @@
                <children>
                   <Button fx:id="announcementsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#announcementsButtonActivated" text="Moje ogłoszenia" />
                   <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Ustawienia" GridPane.columnIndex="1" />
+                  <Button fx:id="mainPageButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#mainPageButtonActivated" prefHeight="31.0" prefWidth="180.0" text="Strona Główna" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
                </children>
             </GridPane>
             <Accordion GridPane.columnIndex="1" GridPane.rowIndex="1">

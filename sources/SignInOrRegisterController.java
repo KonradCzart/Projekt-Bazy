@@ -12,6 +12,9 @@ public class SignInOrRegisterController {
 	
 	@FXML
 	private Button registerButton;
+	
+	@FXML
+	private Button logMeInButton;
 
 	@FXML
 	void handleRegisterAction(ActionEvent event) {
@@ -31,6 +34,25 @@ public class SignInOrRegisterController {
 		// loader.<SignInOrRegisterController>getController();
 		stage.show();
 
+	}
+	
+	@FXML
+	private void logMeInButtonActivated(ActionEvent event) {
+		Window.isLoggedIn = true;
+		Stage stage = (Stage) registerButton.getScene().getWindow();
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("MyAnnouncementsWindow.fxml"));
+
+		try {
+			Scene scene = new Scene((Pane) loader.load());
+			stage.setScene(scene);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// SignInOrRegisterController controller =
+		// loader.<SignInOrRegisterController>getController();
+		stage.show();
 	}
 
 }

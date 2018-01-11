@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Window extends Application {
+	
+	public static boolean isLoggedIn = false;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
