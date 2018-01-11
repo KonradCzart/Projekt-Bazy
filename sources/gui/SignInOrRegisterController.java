@@ -16,6 +16,20 @@ public class SignInOrRegisterController {
 	
 	@FXML
 	private Button logMeInButton;
+	
+	@FXML
+	private Button userNameTextField;
+	
+	@FXML 
+	private Button passwordTextField;
+	
+	String getUserName() {
+		return userNameTextField.getText();
+	}
+	
+	String getPassword() {
+		return passwordTextField.getText();
+	}
 
 	@FXML
 	void handleRegisterAction(ActionEvent event) {
