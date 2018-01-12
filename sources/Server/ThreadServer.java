@@ -264,6 +264,41 @@ public class ThreadServer implements Runnable {
 						}
 						
 					}
+					else if(objectMessage instanceof RegisterMessage)
+					{
+						RegisterMessage register = (RegisterMessage) objectMessage;
+						
+						String query = "Select * From logdata ";
+						Boolean tmpB = true;
+						try {
+							ArrayList<String> name = adminConnection.getStringColumnOne(query);
+							String login = register.getUserName();
+							String hashPassword = register.getPasswordHash();
+							String salt = register.getSalt();
+							String firstName = register.getFirstName();
+							String lastName = register.getLastName();
+							int number = register.getNumber();
+							for(String tmp: name)
+							{
+								if(login.equals(tmp))
+									tmpB = false;
+							}
+							
+							if(tmpB)
+							{
+								adminConnection.registerInsert(login, hashPassword, salt, firstName, lastName, number);
+							}
+							else
+							{
+								FailMessage fail = new FailMessage(4, "Nazwa u¿ytkownika jest zajêta");
+								outStream.writeObject(fail);
+							}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							
+						}
+						
+					}
 				}
 			}
 			catch (IOException e)
