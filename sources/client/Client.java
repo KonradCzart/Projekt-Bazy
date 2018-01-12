@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import Message.*;
+import gui.*;
 
 
 public class Client
@@ -15,8 +16,11 @@ public class Client
 	private ObjectOutputStream outStream;
 	private String localhost;
 	private int port;
-	
 
+	private MainWindowController mainWindow;
+	private MyAnnouncementsWindowController announcementWindow;
+	private MySettingsWindowController settingWindow;
+	private SignInOrRegisterController registerWindow;
 
 	private static final int DEFAULT_PORT = 8189;
 	private static final String DEFAULT_HOSTNAME = "localhost";
@@ -60,5 +64,39 @@ public class Client
 	public int getPort()
 	{
 		return port;
+	}
+	
+	
+	
+	public MainWindowController getMainWindow() {
+		return mainWindow;
+	}
+
+	public void setMainWindow(MainWindowController mainWindow) {
+		this.mainWindow = mainWindow;
+	}
+
+	public MyAnnouncementsWindowController getAnnouncementWindow() {
+		return announcementWindow;
+	}
+
+	public void setAnnouncementWindow(MyAnnouncementsWindowController announcementWindow) {
+		this.announcementWindow = announcementWindow;
+	}
+
+	public MySettingsWindowController getSettingWindow() {
+		return settingWindow;
+	}
+
+	public void setSettingWindow(MySettingsWindowController settingWindow) {
+		this.settingWindow = settingWindow;
+	}
+
+	public SignInOrRegisterController getRegisterWindow() {
+		return registerWindow;
+	}
+
+	public void setRegisterWindow(SignInOrRegisterController registerWindow) {
+		this.registerWindow = registerWindow;
 	}
 }

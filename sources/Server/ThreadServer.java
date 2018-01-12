@@ -212,7 +212,7 @@ public class ThreadServer implements Runnable {
 
 				while((objectMessage = inStream.readObject()) != null)
 				{
-					
+					// TO DO odbieranie przyslanych obiektow
 				}
 			}
 			catch (IOException e)
