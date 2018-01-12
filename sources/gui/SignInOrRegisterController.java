@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -18,10 +20,10 @@ public class SignInOrRegisterController {
 	private Button logMeInButton;
 	
 	@FXML
-	private Button userNameTextField;
+	private TextField userNameTextField;
 	
 	@FXML 
-	private Button passwordTextField;
+	private PasswordField passwordTextField;
 	
 	String getUserName() {
 		return userNameTextField.getText();
