@@ -55,8 +55,9 @@ public class SignInOrRegisterController {
 			e.printStackTrace();
 		}
 
-		// SignInOrRegisterController controller =
-		// loader.<SignInOrRegisterController>getController();
+		SignInOrRegisterController2 controller = loader.<SignInOrRegisterController2>getController();
+		controller.setClient(client);
+		client.setRegisterToBasaWindow(controller);
 		stage.show();
 
 	}

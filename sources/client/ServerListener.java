@@ -62,6 +62,10 @@ public class ServerListener implements Runnable
 					{
 						myClient.getRegisterWindow().errorDialogListener(dectription);
 					}
+					else if(failCode == 4)
+					{
+						myClient.getRegisterToBasaWindow().errorDialogListener(dectription);
+					}
 				}
 				
 	

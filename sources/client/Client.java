@@ -21,6 +21,8 @@ public class Client
 	private MyAnnouncementsWindowController announcementWindow;
 	private MySettingsWindowController settingWindow;
 	private SignInOrRegisterController registerWindow;
+	private SignInOrRegisterController2 registerToBasaWindow;
+
 
 	private static final int DEFAULT_PORT = 8189;
 	private static final String DEFAULT_HOSTNAME = "localhost";
@@ -98,5 +100,13 @@ public class Client
 
 	public void setRegisterWindow(SignInOrRegisterController registerWindow) {
 		this.registerWindow = registerWindow;
+	}
+	
+	public SignInOrRegisterController2 getRegisterToBasaWindow() {
+		return registerToBasaWindow;
+	}
+
+	public void setRegisterToBasaWindow(SignInOrRegisterController2 registerToBasaWindow) {
+		this.registerToBasaWindow = registerToBasaWindow;
 	}
 }
