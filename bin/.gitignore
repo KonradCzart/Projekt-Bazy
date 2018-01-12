@@ -1,14 +1,5 @@
-<<<<<<< HEAD
-/gui/
-=======
 /DataBase/
-/MainWindow.fxml
-/MotorisationCategoryWindow.fxml
-/MyAnnouncementsWindow.fxml
-/MySettingsWindow.fxml
-/SignInOrRegisterWindow.fxml
-/SignInOrRegisterWindow2.fxml
-/Server/
 /Message/
+/Server/
 /client/
->>>>>>> branch 'master' of https://github.com/MatCoder77/Projekt-Bazy.git
+/gui/
