@@ -43,7 +43,6 @@ public class MainWindowController {
 		}
 		client.setMainWindow(this);
 		client.startServerListener();
-				
 	}
 
 	ArrayList<String> getCategories() {
@@ -68,7 +67,7 @@ public class MainWindowController {
 		} else if (category.equals(jobButton.getText())) {
 			return new ArrayList<String>(Arrays.asList("Umowa o pracê", "Umowa zlecenie", "Umowa o dzie³o"));
 		} else if (category.equals(propertyButton.getText())) {
-			return new ArrayList<String>(Arrays.asList("Dzia³ki", "Domy", "Mieszkania", "Wynajem"));
+			return new ArrayList<String>(Arrays.asList("Dzia³ki", "Domy", "Mieszkania"));
 		} else
 			return new ArrayList<String>(Arrays.asList("B£AD"));
 	}
@@ -130,9 +129,39 @@ public class MainWindowController {
 	ArrayList<String> getFarmSpecies() {
 		return new ArrayList<String>(Arrays.asList("Byd³o", "Drób", "Kozy", "Owce", "Trzoda", "Pozosta³e"));
 	}
+	
+	ArrayList<String> getLanguages() {
+		return new ArrayList<String>(Arrays.asList("Angielski", "Francuski", "Niemiecki", "Rosyjski", "Inne"));
+	}
+	
+	ArrayList<String> getGenres() {
+		return new ArrayList<String>(Arrays.asList("Angielski", "Francuski", "Niemiecki", "Rosyjski", "Inne"));
+	}
+	
+	ArrayList<String> getMagazineTypes() {
+		return new ArrayList<String>(Arrays.asList("M³odzie¿owe", "Przyrodnicze", "Informatyczne", "Popularnonaukowe", "Kulinarne", "Motoryzacyjne", "Erotyczne", "Inne"));
+	}
+	
+	ArrayList<String> getTransactionTypes() {
+		return new ArrayList<String>(Arrays.asList("Sprzeda¿", "Wynajem"));
+	}
 
 	@FXML
 	private void initialize() {
+		
+		minPrice = new TextField();
+		minPrice.setPromptText("cena od");
+		minPrice.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		
+		maxPrice = new TextField();
+		maxPrice.setPromptText("cena do");
+		maxPrice.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		
+		conditionBox = new ComboBox<>();
+		conditionBox.getItems().setAll(getCondition());
+		conditionBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		conditionBox.setPromptText("stan");
+		
 		categoryBox.getItems().setAll(FXCollections.observableArrayList(getCategories()));
 		conditionBox.getItems().setAll(FXCollections.observableArrayList(getCondition()));
 	}
@@ -166,13 +195,13 @@ public class MainWindowController {
 	@FXML
 	private Label categoryLabel;
 
-	@FXML
+	
 	private TextField minPrice;
 
-	@FXML
+	
 	private TextField maxPrice;
 
-	@FXML
+	
 	private ComboBox<String> conditionBox;
 
 	@FXML
@@ -180,6 +209,7 @@ public class MainWindowController {
 
 	private void updateSubcategoryPane(String category) {
 		if (!category.equals(categoryLabel.getText())) {
+			attributesGrid.getChildren().clear();
 			ArrayList<String> subcategories = getSubcategories(category);
 			Button button;
 			subcategoryGrid.getChildren().clear();
@@ -435,6 +465,206 @@ public class MainWindowController {
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
 			attributesGrid.add(conditionBox, 0, 2);
+		}
+		else if(subcategory.equals("Budowlane")) {
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+		}
+		else if(subcategory.equals("Motoryzacyjne")) {
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+		}
+		else if(subcategory.equals("Transportowe")) {
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+		}
+		else if(subcategory.equals("Inne")) {
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+		}
+		else if(subcategory.equals("Jêzykowe")) {
+			ComboBox<String> languagesBox = new ComboBox<>();
+			languagesBox.getItems().setAll(FXCollections.observableArrayList(getLanguages()));
+			languagesBox.setPromptText("jêzyk");
+			languagesBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField minYear = new TextField();
+			minYear.setPromptText("rok wyd. od");
+			minYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField maxYear = new TextField();
+			maxYear.setPromptText("rok wyd. do");
+			maxYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField author = new TextField();
+			author.setPromptText("autor");
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+			attributesGrid.add(languagesBox, 1, 0);
+			attributesGrid.add(conditionBox, 1, 1);
+			attributesGrid.add(minYear, 2, 0);
+			attributesGrid.add(maxYear, 2, 1);
+			attributesGrid.add(author, 3, 0);
+			
+		}
+		else if(subcategory.equals("Naukowe")) {
+		
+			TextField minYear = new TextField();
+			minYear.setPromptText("rok wyd. od");
+			minYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField maxYear = new TextField();
+			maxYear.setPromptText("rok wyd. do");
+			maxYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField author = new TextField();
+			author.setPromptText("autor");
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+			attributesGrid.add(author, 1, 0);
+			attributesGrid.add(conditionBox, 1, 1);
+			attributesGrid.add(minYear, 2, 0);
+			attributesGrid.add(maxYear, 2, 1);
+			
+		}
+		else if(subcategory.equals("Literatura")) {
+			
+			TextField minYear = new TextField();
+			minYear.setPromptText("rok wyd. od");
+			minYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField maxYear = new TextField();
+			maxYear.setPromptText("rok wyd. do");
+			maxYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField author = new TextField();
+			author.setPromptText("autor");
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+			attributesGrid.add(author, 1, 0);
+			attributesGrid.add(conditionBox, 1, 1);
+			attributesGrid.add(minYear, 2, 0);
+			attributesGrid.add(maxYear, 2, 1);
+		}
+		else if(subcategory.equals("Czasopisma")) {
+			
+			ComboBox<String> magazineTypesBox = new ComboBox<>();
+			magazineTypesBox.getItems().setAll(FXCollections.observableArrayList(getMagazineTypes()));
+			magazineTypesBox.setPromptText("rodzaj");
+			magazineTypesBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField minYear = new TextField();
+			minYear.setPromptText("rok wyd. od");
+			minYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField maxYear = new TextField();
+			maxYear.setPromptText("rok wyd. do");
+			maxYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField author = new TextField();
+			author.setPromptText("autor");
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+			attributesGrid.add(conditionBox, 0, 2);
+			attributesGrid.add(author, 1, 0);
+			attributesGrid.add(magazineTypesBox, 1, 1);
+			attributesGrid.add(minYear, 2, 0);
+			attributesGrid.add(maxYear, 2, 1);
+		}
+		else if(subcategory.equals("Dzia³ki")) {
+			
+			ComboBox<String> transactionType = new ComboBox<>();
+			transactionType.getItems().setAll(FXCollections.observableArrayList(getTransactionTypes()));
+			transactionType.setPromptText("rodzaj oferty");
+			transactionType.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField minArea = new TextField();
+			minArea.setPromptText("pow. od");
+			minArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField maxArea = new TextField();
+			maxArea.setPromptText("pow. do");
+			maxArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+			attributesGrid.add(transactionType, 0, 2);
+			attributesGrid.add(maxArea, 1, 0);
+			attributesGrid.add(minArea, 1, 1);
+		}
+		else if(subcategory.equals("Domy")) {
+			ComboBox<String> transactionType = new ComboBox<>();
+			transactionType.getItems().setAll(FXCollections.observableArrayList(getTransactionTypes()));
+			transactionType.setPromptText("rodzaj oferty");
+			transactionType.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField minArea = new TextField();
+			minArea.setPromptText("pow. od");
+			minArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField maxArea = new TextField();
+			maxArea.setPromptText("pow. do");
+			maxArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+			attributesGrid.add(transactionType, 0, 2);
+			attributesGrid.add(maxArea, 1, 0);
+			attributesGrid.add(minArea, 1, 1);
+		}
+		else if(subcategory.equals("Mieszkania")) {
+			ComboBox<String> transactionType = new ComboBox<>();
+			transactionType.getItems().setAll(FXCollections.observableArrayList(getTransactionTypes()));
+			transactionType.setPromptText("rodzaj oferty");
+			transactionType.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField minArea = new TextField();
+			minArea.setPromptText("pow. od");
+			minArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			TextField maxArea = new TextField();
+			maxArea.setPromptText("pow. do");
+			maxArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+			attributesGrid.add(transactionType, 0, 2);
+			attributesGrid.add(maxArea, 1, 0);
+			attributesGrid.add(minArea, 1, 1);
+		}
+		else if(subcategory.equals("Umowa o pracê")) {
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+		}
+		else if(subcategory.equals("Umowa o dzie³o")) {
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
+		}
+		else if(subcategory.equals("Umowa zlecenie")) {
+			attributesGrid.getChildren().clear();
+			attributesGrid.add(minPrice, 0, 0);
+			attributesGrid.add(maxPrice, 0, 1);
 		}
 	}
 

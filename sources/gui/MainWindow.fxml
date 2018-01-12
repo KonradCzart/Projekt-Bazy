@@ -81,11 +81,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Samochody osobowe" GridPane.rowIndex="1" />
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Samochody ciężarowe" GridPane.rowIndex="2" />
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Motocykle" GridPane.rowIndex="3" />
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Częśći" GridPane.rowIndex="4" />
-                              <Label fx:id="categoryLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Motoryzacja" />
+                              <Label fx:id="categoryLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                            </children>
                         </GridPane>
                      </children>
@@ -110,11 +106,6 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
-                                             <children>
-                                                <TextField fx:id="minPrice" promptText="cena od" />
-                                                <TextField fx:id="maxPrice" promptText="cena do" GridPane.rowIndex="1" />
-                                                <ComboBox fx:id="conditionBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="stan" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                                             </children>
                                           </GridPane>
                                        </center>
                                     </BorderPane>
