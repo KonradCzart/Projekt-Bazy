@@ -58,10 +58,10 @@
                           </rowConstraints>
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Numer telefonu" textAlignment="JUSTIFY" />
-                              <TextField GridPane.columnIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="phoneNumberField" GridPane.columnIndex="1" />
+                              <TextField fx:id="locationField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Lokalizacja" GridPane.rowIndex="1" />
-                              <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="37.0" prefWidth="154.0" text="Zapisz" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Button fx:id="saveContactData" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="37.0" prefWidth="154.0" text="Zapisz" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets top="5.0" />
                                  </GridPane.margin>
@@ -88,10 +88,10 @@
                               <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Stare hasło" textAlignment="JUSTIFY" />
                               <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Nowe hasło" GridPane.rowIndex="1" />
                               <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Powtórz hasło" GridPane.rowIndex="2" />
-                              <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <PasswordField GridPane.columnIndex="1" />
-                              <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="37.0" prefWidth="154.0" text="Zapisz" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <PasswordField fx:id="newPasswordField2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <PasswordField fx:id="newPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <PasswordField fx:id="currentPasswordField" GridPane.columnIndex="1" />
+                              <Button fx:id="savePassword" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="37.0" prefWidth="154.0" text="Zapisz" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets top="5.0" />
                                  </GridPane.margin>
@@ -118,9 +118,9 @@
                               <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Nazwa" textAlignment="JUSTIFY" />
                               <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Imię" GridPane.rowIndex="1" />
                               <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Nazwisko" GridPane.rowIndex="2" />
-                              <TextField editable="false" GridPane.columnIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="userLoginField" editable="false" GridPane.columnIndex="1" />
+                              <TextField fx:id="userNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="userSurnameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </content>

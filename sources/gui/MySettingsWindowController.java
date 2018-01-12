@@ -6,10 +6,43 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MySettingsWindowController {
+	
+	@FXML
+	private TextField phoneNumberField;
+	
+	@FXML
+	private TextField locationField;
+	
+	@FXML
+	private Button saveContactData;
+	
+	@FXML
+	private PasswordField currentPasswordField;
+	
+	@FXML
+	private PasswordField newPasswordField;
+	
+	@FXML
+	private PasswordField newPasswordField2;
+	
+	@FXML
+	private Button savePassword;
+	
+	@FXML
+	private TextField userLoginField;
+	
+	@FXML
+	private TextField userNameField;
+	
+	@FXML
+	private TextField userSurnameField;
+	
 	@FXML
 	private Button announcementsButton;
 
