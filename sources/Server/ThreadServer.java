@@ -3,9 +3,13 @@ package Server;
 
 import java.io.*;
 import java.net.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import DataBase.AccountsStatus;
+import DataBase.BadLoginException;
 import DataBase.DataBaseConnection;
 import Message.*;
 
@@ -30,6 +34,7 @@ public class ThreadServer implements Runnable {
 	{
 		adminConnection = new DataBaseConnection("admin", "admin123");
 		userConnection = new DataBaseConnection("user", "user12345");
+		startDataBaseConnection();
 		
 		client = new ArrayList<ClientHandler>();
 		hostname = DEFAULT_HOSTNAME;
@@ -48,6 +53,7 @@ public class ThreadServer implements Runnable {
 		client = new ArrayList<ClientHandler>();
 		adminConnection = new DataBaseConnection("admin", "admin123");
 		userConnection = new DataBaseConnection("user", "user12345");
+		startDataBaseConnection();
 	}
 
 	/**
@@ -61,7 +67,11 @@ public class ThreadServer implements Runnable {
 	     }
 		 return instance;
 	}
-
+	private void startDataBaseConnection()
+	{
+		adminConnection.startConnection();
+		userConnection.startConnection();
+	}
 	/**
 	 * @return instance ThreadedServer (Singleton)
 	 */
@@ -155,10 +165,11 @@ public class ThreadServer implements Runnable {
 		private String name;
 		private ObjectOutputStream outStream;
 		private ObjectInputStream inStream;
+		private AccountsStatus myStatus;
 
 		public ClientHandler(Socket coming, String name)
 		{
-
+			myStatus = AccountsStatus.USER;
 			this.coming = coming;
 			this.name = name;
 			try {
@@ -212,7 +223,47 @@ public class ThreadServer implements Runnable {
 
 				while((objectMessage = inStream.readObject()) != null)
 				{
-					// TO DO odbieranie przyslanych obiektow
+					if(objectMessage instanceof LoginMessage)
+					{
+						LoginMessage loginMessage = (LoginMessage) objectMessage;
+						
+						if(loginMessage.getFirst())
+						{
+							String login = loginMessage.getUserName();
+							String salt = "";
+							String query = "Select PasswordSalt From logdata where UserName = ?";
+							try {
+								PreparedStatement ps = userConnection.createOnePreparedStatement(query,login);
+								salt = adminConnection.executeOneString(ps);
+								loginMessage.setSalt(salt);
+								outStream.writeObject(loginMessage);
+							} catch (SQLException e) {
+								FailMessage fail = new FailMessage(3, "Nieprawid這wa nazwa u篡tkownika lub has這!");
+								outStream.writeObject(fail);
+							}
+						}
+						else
+						{
+							String login = loginMessage.getUserName();
+							String passwordHash = loginMessage.getHashPassword();
+							
+							try {
+								System.out.println(login);
+								System.out.println(passwordHash);
+								myStatus = adminConnection.loginToDataBase(login, passwordHash);
+								loginMessage.setFirst(false);
+								outStream.writeObject(loginMessage);
+							} catch (BadLoginException e) 
+							{
+								FailMessage fail = new FailMessage(3, "Nieprawid這wa nazwa u篡tkownika lub has這!");
+								outStream.writeObject(fail);
+							
+							} catch (SQLException e) {
+								System.out.println("cos nie tak z baza");
+							}
+						}
+						
+					}
 				}
 			}
 			catch (IOException e)
