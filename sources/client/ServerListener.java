@@ -3,8 +3,12 @@ package client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import Message.*;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 
 public class ServerListener implements Runnable
 {
@@ -30,11 +34,35 @@ public class ServerListener implements Runnable
 			while((tmp = in.readObject()) != null)
 			{
 				
-//				if(tmp instanceof ChatMessage)
-//				{
-//					
-//
-//				}
+				if(tmp instanceof LoginMessage)
+				{
+					LoginMessage loginMessage = (LoginMessage) tmp;
+					
+					if(loginMessage.getFirst())
+					{
+						
+						String salt = loginMessage.getSalt();
+						myClient.getRegisterWindow().hashPaswordListener(salt);
+					}
+					else
+					{
+						Platform.runLater(() -> {
+							myClient.getRegisterWindow().logMeActivatedListener();
+						});
+					}
+				}
+				else if(tmp instanceof FailMessage)
+				{
+					FailMessage fail = (FailMessage) tmp;
+					
+					int failCode = fail.getCodFail();
+					String dectription = fail.getDescription();
+					
+					if(failCode == 3)
+					{
+						myClient.getRegisterWindow().errorDialogListener(dectription);
+					}
+				}
 				
 	
 				

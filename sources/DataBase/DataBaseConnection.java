@@ -64,6 +64,16 @@ public class DataBaseConnection
 		return csr;
 	}
 	
+	public String executeOneString(PreparedStatement stm) throws SQLException
+	{
+		ResultSet myRs = stm.executeQuery();
+		String line = "";
+		if(myRs.next())
+			line = myRs.getString(1);
+		
+		return line;
+	}
+	
 	public Boolean insertToDataBase(String query)
 	{
 		ArrayList<String> badSqlRegex = new ArrayList<String>();
@@ -171,17 +181,25 @@ public class DataBaseConnection
 		
 		return newStatement;
 	}
+	
+	public PreparedStatement createOnePreparedStatement(String query, String inArg) throws SQLException
+	{
+		PreparedStatement newStatement = myConnection.prepareStatement(query);
+		newStatement.setString(1, inArg);
+		
+		return newStatement;
+	}
 
 	public AccountsStatus loginToDataBase(String login, String password) throws BadLoginException, SQLException
 	{		    
-
+		
 				CallableStatement stmt= myConnection.prepareCall ("{call ValidataLog(?, ?, ?)}");
 		    	
 		    	
 		    	stmt.setString(1, login);       
 			    stmt.setString(2,password);
-				stmt.execute();
 				stmt.registerOutParameter (3, Types.INTEGER);
+				stmt.execute();
 				int output = stmt.getInt (3);
 				if(output == 1)
 				{
@@ -193,7 +211,6 @@ public class DataBaseConnection
 					ResultSet rs = newStatement.executeQuery();
 					if(rs.next())
 						account = rs.getString(1);
-					
 					if(account.equals("Administrator"))
 						return AccountsStatus.ADMIN;
 					else if(account.equals("Moderator"))
@@ -208,5 +225,32 @@ public class DataBaseConnection
 					throw new BadLoginException();
 
 		    
+	}
+
+	public void registerInsert(String login, String hashPassword, String salt, String firstName, String lastName, int number) throws SQLException
+	{
+		CallableStatement stmt= myConnection.prepareCall ("{call RegisterInsert(?, ?, ?, ?, ?, ?)}");
+		stmt.setString(1, login);       
+	    stmt.setString(2, hashPassword);
+	    stmt.setString(3, salt);       
+	    stmt.setString(4, firstName);
+	    stmt.setString(5, lastName);       
+	    stmt.setInt(6, number);
+	    
+	    stmt.executeQuery();
+	}
+
+	public int productInsert(String name, int price, String condision, String description, String subcategory) throws SQLException
+	{
+		String query = "select id from subcategory where name = " + subcategory;
+		PreparedStatement prs = this.createPreparedStatement(query, 0, null);
+		String out = this.executeOneString(prs);
+		int catInt= Integer.parseInt(out);
+		
+		String insert = "insert into product";
+		
+		return 0;
+		//TO DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		
 	}
 }

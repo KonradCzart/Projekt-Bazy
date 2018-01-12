@@ -1,10 +1,14 @@
 package gui;
 import java.io.IOException;
 
+import Message.*;
+import client.Client;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -12,6 +16,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class SignInOrRegisterController {
+	
+	
+	private Client client;
+	private String userName;
 	
 	@FXML
 	private Button registerButton;
@@ -55,6 +63,40 @@ public class SignInOrRegisterController {
 	
 	@FXML
 	private void logMeInButtonActivated(ActionEvent event) {
+
+		LoginMessage newMessage = new LoginMessage(true);
+		userName = getUserName();
+		newMessage.setUserName(userName);
+		
+		try {
+			client.sendMessage(newMessage);
+		} catch (IOException e) {
+			System.out.println("Nie udalo sie wyslac wiadomosci");
+		}
+
+	}
+	
+	// metoda wywolywana przez server
+	public void hashPaswordListener(String salt)
+	{
+		// TO DO zrobic haszowanie hasla przy pomocy otrzymanego stringa salt
+		String passwordHash = getPassword();
+		System.out.println(salt);
+		LoginMessage newMessage = new LoginMessage(false);
+		newMessage.setUserName(userName);
+		newMessage.setHashPassword(passwordHash);
+		
+		try {
+			client.sendMessage(newMessage);
+		} catch (IOException e) {
+			System.out.println("Nie udalo sie wyslac wiadomosci");
+		}
+		
+	}
+	
+	// metoda wywolywana przez server
+	public void logMeActivatedListener()
+	{
 		Window.isLoggedIn = true;
 		Stage stage = (Stage) registerButton.getScene().getWindow();
 
@@ -66,10 +108,25 @@ public class SignInOrRegisterController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		// SignInOrRegisterController controller =
-		// loader.<SignInOrRegisterController>getController();
+		
 		stage.show();
-	}
 
+	}
+	
+	public void setClient(Client client)
+	{
+		this.client = client;
+	}
+	
+	public void errorDialogListener(String errorMessage)
+	{
+		Platform.runLater(() -> {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("");
+			alert.setContentText(errorMessage);
+
+			alert.showAndWait();
+		});
+	}
 }

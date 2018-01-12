@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import org.omg.CORBA.INITIALIZE;
 
+import client.Client;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -27,8 +28,21 @@ import javafx.stage.WindowEvent;
 
 public class MainWindowController {
 
+	private Client client;
 	public MainWindowController() {
-		
+		client = new Client();
+		try {
+			client.connectServer();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		client.setMainWindow(this);
+		client.startServerListener();
+				
 	}
 
 	ArrayList<String> getCategories()
@@ -210,6 +224,7 @@ public class MainWindowController {
 			loader = new FXMLLoader(getClass().getResource("MyAnnouncementsWindow.fxml"));
 		} else {
 			loader = new FXMLLoader(getClass().getResource("SignInOrRegisterWindow.fxml"));
+			
 		}
 
 		try {
@@ -219,8 +234,18 @@ public class MainWindowController {
 			e.printStackTrace();
 		}
 
-		// SignInOrRegisterController controller =
-		// loader.<SignInOrRegisterController>getController();
+		if (Window.isLoggedIn) { 
+			MyAnnouncementsWindowController controller = loader.<MyAnnouncementsWindowController>getController();
+			client.setAnnouncementWindow(controller);
+			controller.setClient(client);
+		}
+		else {
+			SignInOrRegisterController controller = loader.<SignInOrRegisterController>getController();
+			client.setRegisterWindow(controller);
+			controller.setClient(client);
+		}
+		
+		
 		stage.show();
 
 	}
@@ -228,5 +253,10 @@ public class MainWindowController {
 	@FXML
 	private void handleRegisterAction(ActionEvent event) {
 
+	}
+	
+	public void setClient(Client client)
+	{
+		this.client = client;
 	}
 }

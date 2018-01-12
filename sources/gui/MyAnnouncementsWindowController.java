@@ -1,6 +1,7 @@
 package gui;
 import java.io.IOException;
 
+import client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MyAnnouncementsWindowController {
+	
+	private Client client;
 	@FXML
 	private Button settingsButton;
 	
@@ -52,5 +55,10 @@ public class MyAnnouncementsWindowController {
 		// SignInOrRegisterController controller =
 		// loader.<SignInOrRegisterController>getController();
 		stage.show();
+	}
+	
+	public void setClient(Client client)
+	{
+		this.client = client;
 	}
 }
