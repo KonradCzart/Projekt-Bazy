@@ -42,7 +42,7 @@ public class Resources {
 	}
 	
 	static ArrayList<String> getFuelTypes() {
-		return new ArrayList<String>(Arrays.asList("Benzyna", "Gaz"));
+		return new ArrayList<String>(Arrays.asList("Benzyna", "Dissel"));
 	}
 	
 	static ArrayList<String> getCarTypes() {

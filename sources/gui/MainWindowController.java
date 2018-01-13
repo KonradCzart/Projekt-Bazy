@@ -82,7 +82,7 @@ public class MainWindowController {
 	}
 	
 	ArrayList<String> getFuelTypes() {
-		return new ArrayList<String>(Arrays.asList("Benzyna", "Gaz"));
+		return new ArrayList<String>(Arrays.asList("Benzyna", "Dissel"));
 	}
 	
 	ArrayList<String> getCarTypes() {
