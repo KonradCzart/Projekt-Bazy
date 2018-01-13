@@ -2,6 +2,7 @@ package gui;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
+import DataBase.PasswordHash;
 import Message.RegisterMessage;
 import client.Client;
 import javafx.application.Platform;
@@ -82,8 +83,9 @@ public class SignInOrRegisterController2 {
 			e.printStackTrace();
 		}
 
-		// SignInOrRegisterController controller =
-		// loader.<SignInOrRegisterController>getController();
+		SignInOrRegisterController controller = loader.<SignInOrRegisterController>getController();
+		client.setRegisterWindow(controller);
+		controller.setClient(client);
 		stage.show();
 
 	}
@@ -105,12 +107,14 @@ public class SignInOrRegisterController2 {
 		}
 		else if(password1.equals(password2))
 		{
-			//to do haszowanie has³a
+			PasswordHash secure = new PasswordHash();
+			String salt = secure.getNextSalt();
+			String hashPassword = secure.hashPassword(password1, salt);
 			int number = Integer.parseInt(phoneNumber);
 			register.setNumber(number);
 			
-			register.setPasswordHash(password1);
-			register.setSalt(password1);
+			register.setPasswordHash(hashPassword);
+			register.setSalt(salt);
 			
 			
 			try {

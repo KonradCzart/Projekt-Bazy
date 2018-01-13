@@ -1,6 +1,7 @@
 package gui;
 import java.io.IOException;
 
+import DataBase.PasswordHash;
 import Message.*;
 import client.Client;
 import javafx.application.Platform;
@@ -81,12 +82,15 @@ public class SignInOrRegisterController {
 	public void hashPaswordListener(String salt)
 	{
 		// TO DO zrobic haszowanie hasla przy pomocy otrzymanego stringa salt
-		String passwordHash = getPassword();
+		PasswordHash secure = new PasswordHash();
+		String password = getPassword();
+		String passwordHash = secure.hashPassword(password, salt);
 		System.out.println(salt);
 		LoginMessage newMessage = new LoginMessage(false);
 		newMessage.setUserName(userName);
 		newMessage.setHashPassword(passwordHash);
-		
+		userNameTextField.setText("");
+		passwordTextField.setText("");
 		try {
 			client.sendMessage(newMessage);
 		} catch (IOException e) {
