@@ -184,7 +184,12 @@ public class DataBaseConnection
 	
 	public PreparedStatement createOnePreparedStatement(String query, String inArg) throws SQLException
 	{
+		
+		System.out.println("aa");
+		if(myConnection == null)
+			System.out.println("aa");
 		PreparedStatement newStatement = myConnection.prepareStatement(query);
+		System.out.println("aa");
 		newStatement.setString(1, inArg);
 		
 		return newStatement;
@@ -240,17 +245,47 @@ public class DataBaseConnection
 	    stmt.executeQuery();
 	}
 
-	public int productInsert(String name, int price, String condision, String description, String subcategory) throws SQLException
+	public void changePassword(String login, String oldHashPassword, String newHashPassword, String newSalt) throws SQLException
 	{
-		String query = "select id from subcategory where name = " + subcategory;
-		PreparedStatement prs = this.createPreparedStatement(query, 0, null);
+		CallableStatement stmt= myConnection.prepareCall ("{call ChangePassword(?, ?, ?, ?)}");
+		stmt.setString(1, login);       
+	    stmt.setString(2, oldHashPassword);
+	    stmt.setString(3, newHashPassword);       
+	    stmt.setString(4, newSalt);
+	    
+	    stmt.executeQuery();
+	}
+	
+	
+	
+	
+	public void productAdd(String login, String location, String title, String productName, String description,  String condision, String subcategory, double price, int year) throws SQLException
+	{
+		String query = "select id from subcategory where name = ?";
+		System.out.println(subcategory);
+		PreparedStatement prs = this.createOnePreparedStatement(query, subcategory);
+		if(prs == null)
+			System.out.println("aa");
+		
 		String out = this.executeOneString(prs);
-		int catInt= Integer.parseInt(out);
 		
-		String insert = "insert into product";
+		int catID = Integer.parseInt(out);
+		int useID = 1;
 		
-		return 0;
-		//TO DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		if(condision.equals("nowa"))
+			useID = 2;
 		
+		CallableStatement stmt= myConnection.prepareCall ("{call InsertProduct(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+		stmt.setString(1, login);       
+	    stmt.setString(2, location);
+	    stmt.setString(3, title);       
+	    stmt.setString(4, productName);
+		stmt.setString(5, description);       
+	    stmt.setDouble(6, price);
+	    stmt.setInt(7, useID);
+	    stmt.setInt(8, catID);
+	    stmt.setInt(9, year);
+	    
+	    stmt.executeQuery();
 	}
 }
