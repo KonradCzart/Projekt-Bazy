@@ -99,6 +99,16 @@ public class MySettingsWindowController {
 		stage.show();
 	}
 	
+	@FXML
+	private void saveContactDataActivated(ActionEvent event) {
+		
+	}
+	
+	@FXML
+	private void savePasswordActivated(ActionEvent event) {
+		
+	}
+	
 	public void setClient(Client client)
 	{
 		this.client = client;

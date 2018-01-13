@@ -45,16 +45,16 @@ public class MainWindowController {
 
 
 	ArrayList<String> getCategories() {
-		return new ArrayList<String>(Arrays.asList("Motoryzacja", "Elektronika", "Ubrania", "ZwierzÍta", "Us≥ugi",
-				"Praca", "Ksiπøki", "Nieruchomoúi"));
+		return new ArrayList<String>(Arrays.asList("Motoryzacja", "Elektronika", "Ubrania", "Zwierzƒôta", "Us≈Çugi",
+				"Praca", "KsiƒÖ≈ºki", "Nieruchomo≈õi"));
 	}
 
 	ArrayList<String> getSubcategories(String category) {
 		if (category.equals(motorisationButton.getText())) {
 			return new ArrayList<String>(
-					Arrays.asList("Samochody osobowe", "Samochody ciÍøarowe", "Motocykle", "CzÍúci"));
+					Arrays.asList("Samochody osobowe", "Samochody ciƒô≈ºarowe", "Motocykle", "Czƒô≈õci"));
 		} else if (category.equals(electronicsButton.getText())) {
-			return new ArrayList<String>(Arrays.asList("Komputery", "Telefony", "SprzÍt AGD", "Telewizory"));
+			return new ArrayList<String>(Arrays.asList("Komputery", "Telefony", "Sprzƒôt AGD", "Telewizory"));
 		} else if (category.equals(clothesButton.getText())) {
 			return new ArrayList<String>(Arrays.asList("Ubrania", "Buty", "Dodatki"));
 		} else if (category.equals(animalsButton.getText())) {
@@ -62,23 +62,23 @@ public class MainWindowController {
 		} else if (category.equals(servicesButton.getText())) {
 			return new ArrayList<String>(Arrays.asList("Budowlane", "Motoryzacyjne", "Transportowe", "Inne"));
 		} else if (category.equals(booksButton.getText())) {
-			return new ArrayList<String>(Arrays.asList("JÍzykowe", "Naukowe", "Literatura", "Czasopisma"));
+			return new ArrayList<String>(Arrays.asList("Jƒôzykowe", "Naukowe", "Literatura", "Czasopisma"));
 		} else if (category.equals(jobButton.getText())) {
-			return new ArrayList<String>(Arrays.asList("Umowa o pracÍ", "Umowa zlecenie", "Umowa o dzie≥o"));
+			return new ArrayList<String>(Arrays.asList("Umowa o pracƒô", "Umowa zlecenie", "Umowa o dzie≈Ço"));
 		} else if (category.equals(propertyButton.getText())) {
-			return new ArrayList<String>(Arrays.asList("Dzia≥ki", "Domy", "Mieszkania"));
+			return new ArrayList<String>(Arrays.asList("Dzia≈Çki", "Domy", "Mieszkania"));
 		} else
-			return new ArrayList<String>(Arrays.asList("B£AD"));
+			return new ArrayList<String>(Arrays.asList("B≈ÅAD"));
 	}
 
 	ArrayList<String> getCondition() {
-		return new ArrayList<String>(Arrays.asList("nowy", "uøywany", "dowolny"));
+		return new ArrayList<String>(Arrays.asList("nowy", "u≈ºywany", "dowolny"));
 	}
 
 	ArrayList<String> getCarMakes() {
-		return new ArrayList<String>(Arrays.asList("Audi", "BMW", "Chevrolet", "CitroÎn", "Dacia", "Daewoo", "Fiat",
+		return new ArrayList<String>(Arrays.asList("Audi", "BMW", "Chevrolet", "Citro√´n", "Dacia", "Daewoo", "Fiat",
 				"Ford", "Honda", "Hyundai", "Mazda", "Mercedes", "Mitsubishi", "Nissan", "Opel", "Peugeot", "Renault",
-				"Skoda", "Suzuki", "Toyota", "Volkswagen", "Pozosta≥e"));
+				"Skoda", "Suzuki", "Toyota", "Volkswagen", "Pozosta≈Çe"));
 	}
 	
 	ArrayList<String> getFuelTypes() {
@@ -92,21 +92,21 @@ public class MainWindowController {
 	ArrayList<String> getMotorcycleMakes() {
 		return new ArrayList<String>(Arrays.asList("Aprilia", "Barton", "Benelli", "Beta", "Bmw", "Cagiva", "Ducati",
 				"GAS GAS", "Harley-Davidson", "Honda", "Horex", "Husqvarna", "Jawa", "Junak", "Kawasaki", "Kingway", "MZ",
-				"Romet", "Suzuki", "Victory", "Yamaha", "Zipp", "Pozosta≥e"));
+				"Romet", "Suzuki", "Victory", "Yamaha", "Zipp", "Pozosta≈Çe"));
 	}
 	
 	ArrayList<String> getComputerManufacturers() {
 		return new ArrayList<String>(Arrays.asList("Acer", "Apple", "Asus", "Dell", "Fujitsu", "HP", "Lenovo",
-				"MSI", "Toshiba", "Pozosta≥e"));
+				"MSI", "Toshiba", "Pozosta≈Çe"));
 	}
 	
 	ArrayList<String> getPhonesManufacturers() {
 		return new ArrayList<String>(Arrays.asList("Apple", "HTC", "Huawei", "LG", "Micorosoft", "Motorola", "Nokia",
-				"Samsung", "Sony", "Pozosta≥e"));
+				"Samsung", "Sony", "Pozosta≈Çe"));
 	}
 	
 	ArrayList<String> getTVManufacturers() {
-		return new ArrayList<String>(Arrays.asList("Samsung", "Sony", "Philips", "LG", "Panasonic", "Pozosta≥e"));
+		return new ArrayList<String>(Arrays.asList("Samsung", "Sony", "Philips", "LG", "Panasonic", "Pozosta≈Çe"));
 	}
 	
 	ArrayList<String> getClothesSizes() {
@@ -114,7 +114,7 @@ public class MainWindowController {
 	}
 	
 	ArrayList<String> getClothesTypes() {
-		return new ArrayList<String>(Arrays.asList("mÍskie", "damskie"));
+		return new ArrayList<String>(Arrays.asList("mƒôskie", "damskie"));
 	}
 	
 	ArrayList<String> getShoesSizes() {
@@ -122,11 +122,11 @@ public class MainWindowController {
 	}
 	
 	ArrayList<String> getDomesticSpecies() {
-		return new ArrayList<String>(Arrays.asList("Psy", "Koty", "Ptaki", "KrÛliki", "Gryzonie", "Rybki", "Pozosta≥e"));
+		return new ArrayList<String>(Arrays.asList("Psy", "Koty", "Ptaki", "Kr√≥liki", "Gryzonie", "Rybki", "Pozosta≈Çe"));
 	}
 	
 	ArrayList<String> getFarmSpecies() {
-		return new ArrayList<String>(Arrays.asList("Byd≥o", "DrÛb", "Kozy", "Owce", "Trzoda", "Pozosta≥e"));
+		return new ArrayList<String>(Arrays.asList("Byd≈Ço", "Dr√≥b", "Kozy", "Owce", "Trzoda", "Pozosta≈Çe"));
 	}
 	
 	ArrayList<String> getLanguages() {
@@ -138,12 +138,33 @@ public class MainWindowController {
 	}
 	
 	ArrayList<String> getMagazineTypes() {
-		return new ArrayList<String>(Arrays.asList("M≥odzieøowe", "Przyrodnicze", "Informatyczne", "Popularnonaukowe", "Kulinarne", "Motoryzacyjne", "Erotyczne", "Inne"));
+		return new ArrayList<String>(Arrays.asList("M≈Çodzie≈ºowe", "Przyrodnicze", "Informatyczne", "Popularnonaukowe", "Kulinarne", "Motoryzacyjne", "Erotyczne", "Inne"));
 	}
 	
 	ArrayList<String> getTransactionTypes() {
-		return new ArrayList<String>(Arrays.asList("Sprzedaø", "Wynajem"));
+		return new ArrayList<String>(Arrays.asList("Sprzeda≈º", "Wynajem"));
 	}
+	
+	ArrayList<String> getMilageRanges() {
+		return new ArrayList<String>(Arrays.asList("poni≈ºej 50 tys", "50 - 150 tys", "150 - 250 tys", "powy≈ºej 250 tys"));
+	}
+	
+	ArrayList<String> getAreaRanges() {
+		return new ArrayList<String>(Arrays.asList("poni≈ºej 500 m¬≤", "500 - 1000 m¬≤", "1000 - 2000 m¬≤", "powy≈ºej 2000 m¬≤"));
+	}
+	
+	ArrayList<String> getHomeAreaRanges() {
+		return new ArrayList<String>(Arrays.asList("poni≈ºej 50 m¬≤", "50 - 100 m¬≤", "100 - 200 m¬≤", "powy≈ºej 200 m¬≤"));
+	}
+	
+	ArrayList<String> getFlatAreaRanges() {
+		return new ArrayList<String>(Arrays.asList("poni≈ºej 25 m¬≤", "25 - 50 m¬≤", "50 - 100 m¬≤", "powy≈ºej 100 m¬≤"));
+	}
+	
+	ArrayList<String> getScreenSizeRanges() {
+		return new ArrayList<String>(Arrays.asList("poni≈ºej 30", "30 - 40", "40 - 50", "powy≈ºej 50"));
+	}
+	
 	
 //	ObservableList<AnnouncementInfo> getRecentAnnouncements() {
 //		return FXCollections.observableArrayList(new ArrayList(new AnnouncementInfo(date, productName, title, price)))
@@ -175,7 +196,7 @@ public class MainWindowController {
 		AnnouncementInfo a1 = new AnnouncementInfo();
 		a1.setStartDate(new Date(118, 6, 12));
 		a1.setProductName("Audi R8");
-		a1.setTitle("Wszystkie na to lecπ!!!");
+		a1.setTitle("Wszystkie na to lecƒÖ!!!");
 		a1.setPrice(12);
 		
 		AnnouncementInfo a2 = new AnnouncementInfo();
@@ -184,10 +205,10 @@ public class MainWindowController {
 		a2.setTitle("Opla sprzedam");
 		a2.setPrice(1100);
 		
-		ArrayList<AnnouncementInfo> alist = new ArrayList<>(Arrays.asList(a1, a2, new AnnouncementInfo("2017-03-19", "Harnaú", "Skrzynka piwa Harnaú", 11.47)));
+		ArrayList<AnnouncementInfo> alist = new ArrayList<>(Arrays.asList(a1, a2, new AnnouncementInfo("2017-03-19", "Harna≈õ", "Skrzynka piwa Harna≈õ", 11.47)));
 		announcementsList = FXCollections.observableArrayList(alist);
 		setAnnouncements(announcementsList);
-		addAnnauncement(new AnnouncementInfo("2017-09-16", "Per≥π", "Najlepsze piwo", 2.49));
+		addAnnauncement(new AnnouncementInfo("2017-09-16", "Per≈ÇƒÖ", "Najlepsze piwo", 2.49));
 		
 		if(isUserLoggedIn()) {
 			
@@ -313,13 +334,10 @@ public class MainWindowController {
 			maxYear.setPromptText("rok prod. do");
 			maxYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
-			TextField minMilage = new TextField();
-			minMilage.setPromptText("przebieg od");
-			minMilage.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-			
-			TextField maxMilage = new TextField();
-			maxMilage.setPromptText("przebieg do");
-			maxMilage.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			ComboBox<String> milageBox = new ComboBox<>();
+			milageBox.setPromptText("przebieg");
+			milageBox.getItems().setAll(getMilageRanges());
+			milageBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
 			ComboBox<String> fuelBox = new ComboBox<>();
 			fuelBox.setPromptText("paliwo");
@@ -332,13 +350,13 @@ public class MainWindowController {
 			attributesGrid.add(conditionBox, 0, 2);
 			attributesGrid.add(makesBox, 1, 0);
 			attributesGrid.add(fuelBox, 1, 1);
+			attributesGrid.add(milageBox, 1, 2);
 			attributesGrid.add(minYear, 2, 0);
 			attributesGrid.add(maxYear, 2, 1);
-			attributesGrid.add(minMilage, 3, 0);
-			attributesGrid.add(maxMilage, 3, 1);
+			
 			
 		}
-		else if(subcategory.equals("Samochody ciÍøarowe")) {
+		else if(subcategory.equals("Samochody ciƒô≈ºarowe")) {
 			ComboBox<String> typeBox = new ComboBox<>();
 			typeBox.getItems().setAll(FXCollections.observableArrayList(getCarTypes()));
 			typeBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -352,13 +370,10 @@ public class MainWindowController {
 			maxYear.setPromptText("rok prod. do");
 			maxYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
-			TextField minMilage = new TextField();
-			minMilage.setPromptText("przebieg od");
-			minMilage.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-			
-			TextField maxMilage = new TextField();
-			maxMilage.setPromptText("przebieg do");
-			maxMilage.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			ComboBox<String> milageBox = new ComboBox<>();
+			milageBox.setPromptText("przebieg");
+			milageBox.getItems().setAll(getMilageRanges());
+			milageBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
 			ComboBox<String> fuelBox = new ComboBox<>();
 			fuelBox.setPromptText("paliwo");
@@ -371,10 +386,9 @@ public class MainWindowController {
 			attributesGrid.add(conditionBox, 0, 2);
 			attributesGrid.add(typeBox, 1, 0);
 			attributesGrid.add(fuelBox, 1, 1);
+			attributesGrid.add(milageBox, 1, 2);
 			attributesGrid.add(minYear, 2, 0);
 			attributesGrid.add(maxYear, 2, 1);
-			attributesGrid.add(minMilage, 3, 0);
-			attributesGrid.add(maxMilage, 3, 1);
 			
 		}
 		else if(subcategory.equals("Motocykle")) {
@@ -399,7 +413,7 @@ public class MainWindowController {
 			attributesGrid.add(minYear, 2, 0);
 			attributesGrid.add(maxYear, 2, 1);
 		}
-		else if(subcategory.equals("CzÍúci")) {
+		else if(subcategory.equals("Czƒô≈õci")) {
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
@@ -429,7 +443,7 @@ public class MainWindowController {
 			attributesGrid.add(manufacturerBox, 1, 0);
 			attributesGrid.add(conditionBox, 1, 1);
 		}
-		else if(subcategory.equals("SprzÍt AGD")) {
+		else if(subcategory.equals("Sprzƒôt AGD")) {
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
@@ -441,21 +455,18 @@ public class MainWindowController {
 			manufacturerBox.setPromptText("producent");
 			manufacturerBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
-			TextField minSize = new TextField();
-			minSize.setPromptText("przekπtna od");
-			minSize.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			ComboBox<String> screenSizeBox = new ComboBox<>();
+			screenSizeBox.setPromptText("przekƒÖtna");
+			screenSizeBox.getItems().setAll(getScreenSizeRanges());
+			screenSizeBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
-			TextField maxSize = new TextField();
-			maxSize.setPromptText("przekπtna do");
-			maxSize.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
+			attributesGrid.add(conditionBox, 0, 2);
 			attributesGrid.add(manufacturerBox, 1, 0);
-			attributesGrid.add(conditionBox, 1, 1);
-			attributesGrid.add(minSize, 2, 0);
-			attributesGrid.add(maxSize, 2, 1);
+			attributesGrid.add(screenSizeBox, 1, 1);
 		}
 		else if(subcategory.equals("Ubrania")) {
 			ComboBox<String> sizeBox = new ComboBox<>();
@@ -547,10 +558,10 @@ public class MainWindowController {
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
 		}
-		else if(subcategory.equals("JÍzykowe")) {
+		else if(subcategory.equals("Jƒôzykowe")) {
 			ComboBox<String> languagesBox = new ComboBox<>();
 			languagesBox.getItems().setAll(FXCollections.observableArrayList(getLanguages()));
-			languagesBox.setPromptText("jÍzyk");
+			languagesBox.setPromptText("jƒôzyk");
 			languagesBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
 			TextField minYear = new TextField();
@@ -648,27 +659,23 @@ public class MainWindowController {
 			attributesGrid.add(minYear, 2, 0);
 			attributesGrid.add(maxYear, 2, 1);
 		}
-		else if(subcategory.equals("Dzia≥ki")) {
+		else if(subcategory.equals("Dzia≈Çki")) {
 			
 			ComboBox<String> transactionType = new ComboBox<>();
 			transactionType.getItems().setAll(FXCollections.observableArrayList(getTransactionTypes()));
 			transactionType.setPromptText("rodzaj oferty");
 			transactionType.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
-			TextField minArea = new TextField();
-			minArea.setPromptText("pow. od");
-			minArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-			
-			TextField maxArea = new TextField();
-			maxArea.setPromptText("pow. do");
-			maxArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			ComboBox<String> areaBox = new ComboBox<>();
+			areaBox.setPromptText("powierzchnia");
+			areaBox.getItems().setAll(getAreaRanges());
+			areaBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
-			attributesGrid.add(transactionType, 0, 2);
-			attributesGrid.add(maxArea, 1, 0);
-			attributesGrid.add(minArea, 1, 1);
+			attributesGrid.add(transactionType, 1, 0);
+			attributesGrid.add(areaBox, 1, 1);
 		}
 		else if(subcategory.equals("Domy")) {
 			ComboBox<String> transactionType = new ComboBox<>();
@@ -676,20 +683,16 @@ public class MainWindowController {
 			transactionType.setPromptText("rodzaj oferty");
 			transactionType.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
-			TextField minArea = new TextField();
-			minArea.setPromptText("pow. od");
-			minArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-			
-			TextField maxArea = new TextField();
-			maxArea.setPromptText("pow. do");
-			maxArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			ComboBox<String> areaBox = new ComboBox<>();
+			areaBox.setPromptText("powierzchnia");
+			areaBox.getItems().setAll(getHomeAreaRanges());
+			areaBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
-			attributesGrid.add(transactionType, 0, 2);
-			attributesGrid.add(maxArea, 1, 0);
-			attributesGrid.add(minArea, 1, 1);
+			attributesGrid.add(transactionType, 1, 0);
+			attributesGrid.add(areaBox, 1, 1);
 		}
 		else if(subcategory.equals("Mieszkania")) {
 			ComboBox<String> transactionType = new ComboBox<>();
@@ -697,27 +700,24 @@ public class MainWindowController {
 			transactionType.setPromptText("rodzaj oferty");
 			transactionType.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
-			TextField minArea = new TextField();
-			minArea.setPromptText("pow. od");
-			minArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-			
-			TextField maxArea = new TextField();
-			maxArea.setPromptText("pow. do");
-			maxArea.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			ComboBox<String> areaBox = new ComboBox<>();
+			areaBox.setPromptText("powierzchnia");
+			areaBox.getItems().setAll(getFlatAreaRanges());
+			areaBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
 			
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
-			attributesGrid.add(transactionType, 0, 2);
-			attributesGrid.add(maxArea, 1, 0);
-			attributesGrid.add(minArea, 1, 1);
+			attributesGrid.add(transactionType, 1, 0);
+			attributesGrid.add(areaBox, 1, 1);
 		}
-		else if(subcategory.equals("Umowa o pracÍ")) {
+		else if(subcategory.equals("Umowa o pracƒô")) {
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
 		}
-		else if(subcategory.equals("Umowa o dzie≥o")) {
+		else if(subcategory.equals("Umowa o dzie≈Ço")) {
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
@@ -778,7 +778,7 @@ public class MainWindowController {
 
 	@FXML
 	private void animalsButtonActivated(ActionEvent event) {
-		// ZWIERZ TA
+		// ZWIERZƒòTA
 		updateSubcategoryPane(animalsButton.getText());
 	}
 
@@ -787,7 +787,7 @@ public class MainWindowController {
 
 	@FXML
 	private void servicesButtonAcivated(ActionEvent event) {
-		// US£UGI
+		// US≈ÅUGI
 		updateSubcategoryPane(servicesButton.getText());
 	}
 
@@ -805,7 +805,7 @@ public class MainWindowController {
 
 	@FXML
 	private void booksButtonActivated(ActionEvent event) {
-		// KSIAØKI
+		// KSIA≈ªKI
 		updateSubcategoryPane(booksButton.getText());
 	}
 
@@ -814,7 +814,7 @@ public class MainWindowController {
 
 	@FXML
 	private void propertyButtonActivated(ActionEvent event) {
-		// NIER”CHOMOå∆I
+		// NIER√ìCHOMO≈öƒÜI
 		updateSubcategoryPane(propertyButton.getText());
 	}
 
