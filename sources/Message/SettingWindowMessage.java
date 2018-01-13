@@ -10,7 +10,14 @@ public class SettingWindowMessage implements Message{
 	private String userName;
 	private String firstName;
 	private String lastName;
+	private String salt;
 	
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	public String getUserName() {
 		return userName;
 	}

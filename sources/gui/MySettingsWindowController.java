@@ -1,12 +1,15 @@
 package gui;
 import java.io.IOException;
 
+import DataBase.PasswordHash;
 import Message.*;
 import client.Client;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,6 +19,8 @@ import javafx.stage.Stage;
 public class MySettingsWindowController {
 	
 	private Client client;
+	private String oldSalt;
+	
 	public MySettingsWindowController ()
 	{
 		client = Window.client;
@@ -107,6 +112,34 @@ public class MySettingsWindowController {
 	@FXML
 	private void savePasswordActivated(ActionEvent event) {
 		
+		String oldPassword = currentPasswordField.getText();
+		String newPassword1 = newPasswordField.getText();
+		String newPassword2 = newPasswordField2.getText();
+		
+		if(newPassword1.equals(newPassword2))
+		{
+			PasswordHash secure = new PasswordHash();
+			String salt = secure.getNextSalt();
+			System.out.println(oldPassword);
+			String hashPasswordOld = secure.hashPassword(oldPassword, oldSalt);
+			System.out.println(hashPasswordOld);
+			System.out.println(oldSalt);
+			String hashPasswordNew = secure.hashPassword(newPassword1, salt);
+			
+			ChangeSettings setting = new ChangeSettings();
+			setting.setNewHashPassword(hashPasswordNew);
+			setting.setOldHashPassword(hashPasswordOld);
+			setting.setNewSalt(salt);
+			
+			try {
+				client.sendMessage(setting);
+			} catch (IOException e) {
+				System.out.print("nie wyslano!");
+			}
+		}
+		else
+			this.errorDialogListener("Nowe has³a musz¹ byæ identyczne!");
+		
 	}
 	
 	public void setClient(Client client)
@@ -114,13 +147,41 @@ public class MySettingsWindowController {
 		this.client = client;
 	}
 	
-	public void setUserInformatorListener(String login, String firstName, String lastName)
+	public void setUserInformatorListener(String login, String firstName, String lastName, String salt)
 	{
 		userLoginField.setText(login);
 		userNameField.setText(firstName);
 		userSurnameField.setText(lastName);
-		
+		this.oldSalt = salt;
 	}
-
 	
+	public void errorDialogListener(String errorMessage)
+	{
+		Platform.runLater(() -> {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("");
+			alert.setContentText(errorMessage);
+
+			alert.showAndWait();
+		});
+	}
+	
+	public void successDialogListener(String successMessage, String salt)
+	{
+		this.oldSalt = salt;
+		this.newPasswordField.setText("");
+		this.newPasswordField2.setText("");
+		this.currentPasswordField.setText("");
+		Platform.runLater(() -> {
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Success");
+			alert.setHeaderText("");
+			alert.setContentText(successMessage);
+
+			alert.showAndWait();
+		});
+
+	}
 }

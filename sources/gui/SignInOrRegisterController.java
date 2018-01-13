@@ -90,7 +90,7 @@ public class SignInOrRegisterController {
 		PasswordHash secure = new PasswordHash();
 		String password = getPassword();
 		String passwordHash = secure.hashPassword(password, salt);
-		System.out.println(salt);
+		System.out.println(passwordHash);
 		LoginMessage newMessage = new LoginMessage(false);
 		newMessage.setUserName(userName);
 		newMessage.setHashPassword(passwordHash);

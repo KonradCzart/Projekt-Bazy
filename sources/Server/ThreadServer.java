@@ -304,7 +304,8 @@ public class ThreadServer implements Runnable {
 					}
 					else if(objectMessage instanceof SettingWindowMessage)
 					{
-						String query = "Select FirstName, LastName From users where UserName = ?";
+						String query = "Select FirstName, LastName, PasswordSalt From users inner join logdata on users.UserName = logdata.UserName " +
+								"where users.UserName = ?";
 						CachedRowSet csr;
 						try {
 							PreparedStatement ps = userConnection.createOnePreparedStatement(query,name);
@@ -313,10 +314,12 @@ public class ThreadServer implements Runnable {
 							{
 								String firstName = csr.getString(1);
 								String lastName = csr.getString(2);
+								String salt = csr.getString(3);
 								SettingWindowMessage settingMessage = new SettingWindowMessage();
 								settingMessage.setUserName(name);
 								settingMessage.setFirstName(firstName);
 								settingMessage.setLastName(lastName);
+								settingMessage.setSalt(salt);
 								outStream.writeObject(settingMessage);
 							}
 						} catch (SQLException e) {
@@ -324,6 +327,25 @@ public class ThreadServer implements Runnable {
 							e.printStackTrace();
 						}
 						
+					}
+					else if(objectMessage instanceof ChangeSettings)
+					{
+						ChangeSettings settings = (ChangeSettings) objectMessage;
+						String oldPassword = settings.getOldHashPassword();
+						String newPassword = settings.getNewHashPassword();
+						String newSalt = settings.getNewSalt();
+						System.out.println(oldPassword);
+						try {
+							adminConnection.changePassword(name, oldPassword, newPassword, newSalt);
+							SuccessMessage success = new SuccessMessage(5, "Has³o zosta³o zmienione!");
+							success.setDescription2(newSalt);
+							
+							outStream.writeObject(success);
+						} catch (SQLException e) {
+							FailMessage fail = new FailMessage(5, "Nie udalo siê zmieniæ has³a!");
+							outStream.writeObject(fail);
+							e.printStackTrace();
+						}
 					}
 					//To dooooooooooooooooo
 				}

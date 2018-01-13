@@ -250,6 +250,8 @@ public class DataBaseConnection
 		CallableStatement stmt= myConnection.prepareCall ("{call ChangePassword(?, ?, ?, ?)}");
 		stmt.setString(1, login);       
 	    stmt.setString(2, oldHashPassword);
+	    System.out.println("tuuuu");
+	    System.out.println(oldHashPassword);
 	    stmt.setString(3, newHashPassword);       
 	    stmt.setString(4, newSalt);
 	    

@@ -11,6 +11,13 @@ public class ChangeSettings implements Message {
 	private String newHashPassword;
 	private String newSalt;
 	
+	public ChangeSettings()
+	{
+		oldHashPassword = "";
+		newHashPassword = "";
+		newSalt = "";
+	}
+	
 	public String getOldHashPassword() {
 		return oldHashPassword;
 	}

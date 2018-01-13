@@ -65,6 +65,22 @@ public class ServerListener implements Runnable
 					else if(failCode == 4)
 					{
 						myClient.getRegisterToBasaWindow().errorDialogListener(dectription);
+					}else if(failCode == 5)
+					{
+						myClient.getSettingWindow().errorDialogListener(dectription);
+					}
+				}
+				else if(tmp instanceof SuccessMessage)
+				{
+					SuccessMessage success = (SuccessMessage) tmp;
+					
+					int successCode = success.getCodSuccess();
+					String dectription = success.getDescription();
+					
+					if(successCode == 5)
+					{
+						String salt = success.getDescription2();
+						myClient.getSettingWindow().successDialogListener(dectription, salt);
 					}
 				}
 				else if(tmp instanceof SettingWindowMessage)
@@ -73,9 +89,10 @@ public class ServerListener implements Runnable
 					String login = setting.getUserName();
 					String firstName = setting.getFirstName();
 					String lastName = setting.getLastName();
+					String salt = setting.getSalt();
 					
 					Platform.runLater(() -> {
-						myClient.getSettingWindow().setUserInformatorListener(login, firstName, lastName);
+						myClient.getSettingWindow().setUserInformatorListener(login, firstName, lastName, salt);
 					});
 				}
 				
