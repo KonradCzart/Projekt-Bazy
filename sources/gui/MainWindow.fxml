@@ -51,7 +51,7 @@
               </rowConstraints>
                <children>
                   <Button fx:id="myAccountButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="196.0" text="Moje konto" GridPane.columnIndex="6" />
-                  <Button fx:id="addAnnouncementButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addAnnouncementButtonActivated" prefHeight="45.0" prefWidth="37.0" text="Dodaj odłoszenie" GridPane.columnIndex="5" />
+                  <Button fx:id="addAnnouncementButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addAnnouncementButtonActivated" prefHeight="45.0" prefWidth="37.0" text="Dodaj ogłoszenie" GridPane.columnIndex="5" />
                </children>
             </GridPane>
          </top>
