@@ -22,6 +22,11 @@ public class SignInOrRegisterController {
 	private Client client;
 	private String userName;
 	
+	public SignInOrRegisterController ()
+	{
+		client = Window.client;
+		client.setRegisterWindow(this);
+	}
 	@FXML
 	private Button registerButton;
 	
@@ -56,10 +61,10 @@ public class SignInOrRegisterController {
 			e.printStackTrace();
 		}
 
-		SignInOrRegisterController2 controller = loader.<SignInOrRegisterController2>getController();
-		controller.setClient(client);
-		client.setRegisterToBasaWindow(controller);
-		stage.show();
+//		SignInOrRegisterController2 controller = loader.<SignInOrRegisterController2>getController();
+//		controller.setClient(client);
+//		client.setRegisterToBasaWindow(controller);
+//		stage.show();
 
 	}
 	

@@ -67,6 +67,17 @@ public class ServerListener implements Runnable
 						myClient.getRegisterToBasaWindow().errorDialogListener(dectription);
 					}
 				}
+				else if(tmp instanceof SettingWindowMessage)
+				{
+					SettingWindowMessage setting = (SettingWindowMessage) tmp;
+					String login = setting.getUserName();
+					String firstName = setting.getFirstName();
+					String lastName = setting.getLastName();
+					
+					Platform.runLater(() -> {
+						myClient.getSettingWindow().setUserInformatorListener(login, firstName, lastName);
+					});
+				}
 				
 	
 				

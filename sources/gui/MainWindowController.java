@@ -37,20 +37,12 @@ public class MainWindowController {
 
 	private Client client;
 	public MainWindowController() {
-
-		client = new Client();
-		try {
-			client.connectServer();
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		client = Window.client;
 		client.setMainWindow(this);
-		client.startServerListener();
 	}
+	
+
 
 	ArrayList<String> getCategories() {
 		return new ArrayList<String>(Arrays.asList("Motoryzacja", "Elektronika", "Ubrania", "Zwierzêta", "Us³ugi",
@@ -797,16 +789,16 @@ public class MainWindowController {
 			e.printStackTrace();
 		}
 
-		if (Window.isLoggedIn) { 
-			MyAnnouncementsWindowController controller = loader.<MyAnnouncementsWindowController>getController();
-			client.setAnnouncementWindow(controller);
-			controller.setClient(client);
-		}
-		else {
-			SignInOrRegisterController controller = loader.<SignInOrRegisterController>getController();
-			client.setRegisterWindow(controller);
-			controller.setClient(client);
-		}
+//		if (Window.isLoggedIn) { 
+//			MyAnnouncementsWindowController controller = loader.<MyAnnouncementsWindowController>getController();
+//			client.setAnnouncementWindow(controller);
+//			controller.setClient(client);
+//		}
+//		else {
+//			SignInOrRegisterController controller = loader.<SignInOrRegisterController>getController();
+//			client.setRegisterWindow(controller);
+//			controller.setClient(client);
+//		}
 		
 		
 		stage.show();

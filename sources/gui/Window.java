@@ -1,5 +1,6 @@
 package gui;
 
+import client.Client;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,9 +10,12 @@ import javafx.stage.Stage;
 public class Window extends Application {
 	
 	public static boolean isLoggedIn = false;
+	public static Client client = new Client();
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		client.connectServer();
+		client.startServerListener();
 		Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         primaryStage.setTitle("CzaKi Trade");
         Scene scene = new Scene(root);
