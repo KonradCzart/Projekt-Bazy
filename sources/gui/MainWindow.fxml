@@ -26,9 +26,6 @@
    </rowConstraints>
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-         <top>
-            <Button fx:id="myAccountButton" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="210.0" text="Moje konto" BorderPane.alignment="TOP_RIGHT" />
-         </top>
          <center>
             <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="44.0" prefWidth="879.0" BorderPane.alignment="CENTER">
                <children>
@@ -38,6 +35,26 @@
                </children>
             </FlowPane>
          </center>
+         <top>
+            <GridPane prefHeight="45.0" prefWidth="1213.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="148.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="198.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="myAccountButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="196.0" text="Moje konto" GridPane.columnIndex="6" />
+                  <Button fx:id="addAnnouncementButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addAnnouncementButtonActivated" prefHeight="45.0" prefWidth="37.0" text="Dodaj odłoszenie" GridPane.columnIndex="5" />
+               </children>
+            </GridPane>
+         </top>
       </BorderPane>
       <GridPane GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
         <columnConstraints>

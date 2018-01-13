@@ -144,6 +144,10 @@ public class MainWindowController {
 	ArrayList<String> getTransactionTypes() {
 		return new ArrayList<String>(Arrays.asList("Sprzeda¿", "Wynajem"));
 	}
+	
+//	ObservableList<AnnouncementInfo> getRecentAnnouncements() {
+//		return FXCollections.observableArrayList(new ArrayList(new AnnouncementInfo(date, productName, title, price)))
+//	}
 
 	@FXML
 	private void initialize() {
@@ -172,10 +176,22 @@ public class MainWindowController {
 		a1.setStartDate(new Date(118, 6, 12));
 		a1.setProductName("Audi R8");
 		a1.setTitle("Wszystkie na to lec¹!!!");
-		a1.setPrice(1.78);
-		ArrayList<AnnouncementInfo> alist = new ArrayList<>(Arrays.asList(a1));
+		a1.setPrice(12);
+		
+		AnnouncementInfo a2 = new AnnouncementInfo();
+		a2.setStartDate(new Date(112, 6, 12));
+		a2.setProductName("Opel Astra");
+		a2.setTitle("Opla sprzedam");
+		a2.setPrice(1100);
+		
+		ArrayList<AnnouncementInfo> alist = new ArrayList<>(Arrays.asList(a1, a2, new AnnouncementInfo("2017-03-19", "Harnaœ", "Skrzynka piwa Harnaœ", 11.47)));
 		announcementsList = FXCollections.observableArrayList(alist);
 		setAnnouncements(announcementsList);
+		addAnnauncement(new AnnouncementInfo("2017-09-16", "Per³¹", "Najlepsze piwo", 2.49));
+		
+		if(isUserLoggedIn()) {
+			
+		}
 		
 	}
 	
@@ -184,9 +200,20 @@ public class MainWindowController {
 	void setAnnouncements(ObservableList<AnnouncementInfo> list) {
 		announcementsTable.setItems(list);
 	}
+	
+	void addAnnauncement(AnnouncementInfo annauncement) {
+		announcementsList.add(annauncement);
+	}
+	
+	boolean isUserLoggedIn() {
+		return Window.isLoggedIn;
+	}
 
 	@FXML
 	private Button myAccountButton;
+	
+	@FXML
+	private Button addAnnouncementButton;
 
 	@FXML
 	private Button registerButton;
@@ -703,6 +730,26 @@ public class MainWindowController {
 	}
 
 	@FXML
+	private void addAnnouncementButtonActivated(ActionEvent event) {
+			Stage stage = (Stage) myAccountButton.getScene().getWindow();
+			FXMLLoader loader;
+			if (isUserLoggedIn()) {
+				loader = new FXMLLoader(getClass().getResource("AddAnnouncementWindow.fxml"));
+			} else {
+				loader = new FXMLLoader(getClass().getResource("SignInOrRegisterWindow.fxml"));
+				
+			}
+
+			try {
+				Scene scene = new Scene((Pane) loader.load());
+				stage.setScene(scene);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			stage.show();
+	}
+	
+	@FXML
 	private void motorisationButtonActivated(ActionEvent event) {
 		// MOTORYZACJA
 		updateSubcategoryPane(motorisationButton.getText());
@@ -775,7 +822,7 @@ public class MainWindowController {
 	private void handleButtonAction(ActionEvent event) {
 		Stage stage = (Stage) myAccountButton.getScene().getWindow();
 		FXMLLoader loader;
-		if (Window.isLoggedIn) {
+		if (isUserLoggedIn()) {
 			loader = new FXMLLoader(getClass().getResource("MyAnnouncementsWindow.fxml"));
 		} else {
 			loader = new FXMLLoader(getClass().getResource("SignInOrRegisterWindow.fxml"));

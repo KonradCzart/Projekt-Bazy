@@ -21,6 +21,17 @@ public class AnnouncementInfo {
 		price = new SimpleDoubleProperty();
 	}
 	
+	public AnnouncementInfo(String date, String productName, String title, double price) {
+		this.startDate = new SimpleObjectProperty<>();
+		this.productName = new SimpleStringProperty();
+		this.title = new SimpleStringProperty();
+		this.price = new SimpleDoubleProperty();
+		setStartDate(date);
+		setProductName(productName);
+		setTitle(title);
+		setPrice(price);
+	}
+	
 	public Object getStartDate() {
 		return startDate.get();
 	}
@@ -31,6 +42,10 @@ public class AnnouncementInfo {
 	
 	public void setStartDate(Date date) {
 		startDate.set(date);
+	}
+	
+	public void setStartDate(String date) {
+		startDate.set(Date.valueOf(date));
 	}
 	
 	public String getProductName() {
