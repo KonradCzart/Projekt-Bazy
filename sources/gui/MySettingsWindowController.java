@@ -1,6 +1,8 @@
 package gui;
 import java.io.IOException;
 
+import Message.*;
+import client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,19 @@ import javafx.stage.Stage;
 
 public class MySettingsWindowController {
 	
+	private Client client;
+	public MySettingsWindowController ()
+	{
+		client = Window.client;
+		client.setSettingWindow(this);
+		
+		SettingWindowMessage newSetting = new SettingWindowMessage();
+		try {
+			client.sendMessage(newSetting);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+	}
 	@FXML
 	private TextField phoneNumberField;
 	
@@ -82,5 +97,18 @@ public class MySettingsWindowController {
 		// SignInOrRegisterController controller =
 		// loader.<SignInOrRegisterController>getController();
 		stage.show();
+	}
+	
+	public void setClient(Client client)
+	{
+		this.client = client;
+	}
+	
+	public void setUserInformatorListener(String login, String firstName, String lastName)
+	{
+		userLoginField.setText(login);
+		userNameField.setText(firstName);
+		userSurnameField.setText(lastName);
+		
 	}
 }

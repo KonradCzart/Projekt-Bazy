@@ -13,6 +13,11 @@ import javafx.stage.Stage;
 public class MyAnnouncementsWindowController {
 	
 	private Client client;
+	public MyAnnouncementsWindowController ()
+	{
+		client = Window.client;
+		client.setAnnouncementWindow(this);
+	}
 	@FXML
 	private Button settingsButton;
 	

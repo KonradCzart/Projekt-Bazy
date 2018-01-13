@@ -96,7 +96,7 @@ public class DataBaseConnection
 					return false;
 				}
 			}
-			Pattern.matches("regex", "ci¹g do sprawdzenia");
+			//Pattern.matches("regex", "ci¹g do sprawdzenia");
 			stmt.executeUpdate(query);
 			
 			return true;

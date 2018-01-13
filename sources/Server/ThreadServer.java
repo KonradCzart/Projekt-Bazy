@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import javax.sql.rowset.CachedRowSet;
+
 import DataBase.AccountsStatus;
 import DataBase.BadLoginException;
 import DataBase.DataBaseConnection;
@@ -253,6 +255,7 @@ public class ThreadServer implements Runnable {
 								myStatus = adminConnection.loginToDataBase(login, passwordHash);
 								loginMessage.setFirst(false);
 								outStream.writeObject(loginMessage);
+								this.name = login;
 							} catch (BadLoginException e) 
 							{
 								FailMessage fail = new FailMessage(3, "Nieprawid³owa nazwa u¿ytkownika lub has³o!");
@@ -299,6 +302,30 @@ public class ThreadServer implements Runnable {
 						}
 						
 					}
+					else if(objectMessage instanceof SettingWindowMessage)
+					{
+						String query = "Select FirstName, LastName From users where UserName = ?";
+						CachedRowSet csr;
+						try {
+							PreparedStatement ps = userConnection.createOnePreparedStatement(query,name);
+							csr = userConnection.executePreparedStatement(ps);
+							if(csr.next())
+							{
+								String firstName = csr.getString(1);
+								String lastName = csr.getString(2);
+								SettingWindowMessage settingMessage = new SettingWindowMessage();
+								settingMessage.setUserName(name);
+								settingMessage.setFirstName(firstName);
+								settingMessage.setLastName(lastName);
+								outStream.writeObject(settingMessage);
+							}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
+					//To dooooooooooooooooo
 				}
 			}
 			catch (IOException e)
