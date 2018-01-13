@@ -1,14 +1,18 @@
 package gui;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.sql.Date;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Observable;
 
 import org.omg.CORBA.INITIALIZE;
 
 import client.Client;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +22,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -164,6 +171,26 @@ public class MainWindowController {
 		
 		categoryBox.getItems().setAll(FXCollections.observableArrayList(getCategories()));
 		conditionBox.getItems().setAll(FXCollections.observableArrayList(getCondition()));
+		
+		dateColumn.setCellValueFactory(cellData -> cellData.getValue().startDateProperty());
+		productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
+		titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
+		priceColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+		AnnouncementInfo a1 = new AnnouncementInfo();
+		a1.setStartDate(new Date(118, 6, 12));
+		a1.setProductName("Audi R8");
+		a1.setTitle("Wszystkie na to lec¹!!!");
+		a1.setPrice(1.78);
+		ArrayList<AnnouncementInfo> alist = new ArrayList<>(Arrays.asList(a1));
+		announcementsList = FXCollections.observableArrayList(alist);
+		setAnnouncements(announcementsList);
+		
+	}
+	
+	private ObservableList<AnnouncementInfo> announcementsList;
+	
+	void setAnnouncements(ObservableList<AnnouncementInfo> list) {
+		announcementsTable.setItems(list);
 	}
 
 	@FXML
@@ -186,6 +213,21 @@ public class MainWindowController {
 
 	@FXML
 	private Button searchButton;
+	
+	@FXML
+	private TableView announcementsTable;
+	
+	@FXML
+	private TableColumn<AnnouncementInfo, Date> dateColumn;
+	
+	@FXML
+	private TableColumn<AnnouncementInfo, String> productNameColumn;
+	
+	@FXML
+	private TableColumn<AnnouncementInfo, String> titleColumn;
+	
+	@FXML
+	private TableColumn<AnnouncementInfo, Double> priceColumn;
 
 	@FXML
 	private void searchButtonActivated(ActionEvent event) {

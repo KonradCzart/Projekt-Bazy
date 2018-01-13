@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-=======
+/DataBase/
 /Message/
-/client/
->>>>>>> branch 'master' of https://github.com/MatCoder77/Projekt-Bazy.git
-/gui/
 /Server/
+/client/
+/gui/

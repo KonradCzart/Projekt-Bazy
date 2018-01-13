@@ -113,11 +113,12 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="902.0">
                                  <children>
-                                    <TableView layoutX="30.0" layoutY="27.0" prefHeight="389.0" prefWidth="902.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="announcementsTable" layoutX="30.0" layoutY="27.0" prefHeight="389.0" prefWidth="902.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <columns>
-                                        <TableColumn prefWidth="85.0" text="Data" />
-                                        <TableColumn prefWidth="523.0" text="Tytuł" />
-                                          <TableColumn prefWidth="293.0" text="Cena" />
+                                        <TableColumn fx:id="dateColumn" prefWidth="133.0" text="Data" />
+                                        <TableColumn fx:id="productNameColumn" prefWidth="240.0" text="Przedmiot ogłoszenia" />
+                                          <TableColumn fx:id="titleColumn" prefWidth="410.0" text="Tytuł ogłoszenia" />
+                                          <TableColumn fx:id="priceColumn" prefWidth="118.0" text="Cena" />
                                       </columns>
                                     </TableView>
                                  </children>
