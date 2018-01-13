@@ -297,7 +297,7 @@ public class ThreadServer implements Runnable {
 								outStream.writeObject(fail);
 							}
 						} catch (SQLException e) {
-							// TODO Auto-generated catch block
+							e.printStackTrace();
 							
 						}
 						
