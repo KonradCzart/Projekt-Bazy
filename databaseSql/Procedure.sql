@@ -35,4 +35,49 @@ END; //
 
 DELIMITER ;
 
-call RegisterInsert('konrad', 'konrad123', 'aaaaaa', 'Konrad' , 'Czart' , 697203222);
+DROP PROCEDURE IF EXISTS ChangePassword;
+
+DELIMITER //
+
+CREATE PROCEDURE ChangePassword (in login VARCHAR(30), in pasword VARCHAR(128) , in newpasword VARCHAR(128), in salt VARCHAR(128))
+
+BEGIN
+	DECLARE oldPassword varchar(128);
+	
+    SELECT PasswordHash INTO oldPassword FROM  logdata WHERE UserName = login;
+    
+	IF oldPassword = pasword THEN
+      UPDATE logdata SET PasswordHash = newpasword WHERE UserName = login;
+      UPDATE logdata SET PasswordSalt = salt WHERE UserName = login;
+   ELSE
+		SIGNAL SQLSTATE '55555'
+        SET MESSAGE_TEXT = '11111';
+   END IF;
+END; //
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS InsertProduct;
+
+DELIMITER //
+
+CREATE PROCEDURE InsertProduct (in login VARCHAR(30), in locationP VARCHAR(30), in title VARCHAR(60), in productName VARCHAR(30) , in descriptionProduct VARCHAR(300), in priceProduct DECIMAL(10, 2),in useStatus int, in subcategoryI INT, in yearP INT)
+
+BEGIN
+	DECLARE idProduct int;
+    DECLARE sDate DATE;
+    DECLARE eDate DATE;
+    
+    SET sDate = current_date();
+    SET eDate = date_add(sDate , INTERVAL 14 DAY);
+	
+    INSERT INTO product(Name, Price, ProductYear, ProductCondition, Description) VALUES	( productName, priceProduct, yearP, useStatus, descriptionProduct);
+    SET idProduct = LAST_INSERT_ID();
+    INSERT INTO productcategory ( ProductID, SubcategoryID) VALUES ( idProduct, subcategoryI);
+    INSERT INTO announcements ( ProductID, UserName, Location, BeginDate, EndDate, Status) VALUES (idProduct, login, locationP, sDate, eDate, 1);
+    
+END; //
+
+DELIMITER ;
+call RegisterInsert ( 'kon', '123', 'aaaaaaa', 'konrad', 'czart', 123123123);
+ call InsertProduct ( 'kon','Michałówka', 'Sprzedam auto osobowe' , 'audi b5bd', 'dasfasfasdasfasfdasda',  158545.25, 1, 1,2008);

@@ -41,6 +41,7 @@ CREATE TABLE Product (
 	ID INT AUTO_INCREMENT,
     Name VARCHAR(30),			-- KLUCZ OBCY, ALE NA CO?
     Price DECIMAL(10, 2) UNSIGNED NOT NULL,
+    ProductYear INT,
     ProductCondition ENUM('USED', 'NEW'),
     Description VARCHAR(300),
     PRIMARY KEY (ID)
@@ -50,6 +51,7 @@ CREATE TABLE Product (
 CREATE TABLE Announcements (
 	ID INT NOT NULL AUTO_INCREMENT,
     ProductID INT,
+    TitleName VARCHAR(60),
     UserName VARCHAR(30),
     Location VARCHAR(30),
     BeginDate DATE,
