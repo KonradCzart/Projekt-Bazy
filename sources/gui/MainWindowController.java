@@ -203,7 +203,7 @@ public class MainWindowController {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					AnnouncementInfo rowData = row.getItem();
 					System.out.println(rowData.getTitle());
-					showAnnouncement(rowData);
+					//showAnnouncement(rowData);
 				}
 			});
 			return row;
@@ -243,7 +243,7 @@ public class MainWindowController {
 		return chosenSubcategory;
 	}
 	
-	void showAnnouncement(AnnouncementInfo info) {
+	void showAnnouncement(Announcement announcement) {
 		
 		
 		Stage stage = (Stage) myAccountButton.getScene().getWindow();
@@ -258,7 +258,7 @@ public class MainWindowController {
 		}
 
 		ShowAnnouncementWindowController controller = loader.<ShowAnnouncementWindowController>getController();
-		controller.setAnnouncement(getAnnouncement(info));
+		controller.setAnnouncement(announcement);
 		stage.show();
 	}
 	
@@ -267,10 +267,10 @@ public class MainWindowController {
 		return null;
 	}
 	
-	Announcement getAnnouncement(AnnouncementInfo info) {
-		//pobieranie ogłoszenia z bazy
-		return new Announcement(info.getProductName(), info.getTitle(), getChosenCategory(), getChosenSubcategory(), getAttributes(), "SAGDGDSGS");
-	}
+//	Announcement getAnnouncement(AnnouncementInfo info) {
+//		//pobieranie ogłoszenia z bazy
+//		return new Announcement(info.getProductName(), info.getTitle(), getChosenCategory(), getChosenSubcategory(), getAttributes(), "SAGDGDSGS");
+//	}
 	
 	@SuppressWarnings("unchecked")
 	Map<String, String> getAttributes() {
