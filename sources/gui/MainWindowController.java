@@ -286,6 +286,7 @@ public class MainWindowController {
 				else
 					attributes.put(cb.getPromptText(), cb.getValue());
 			}
+			//fsd
 		}
 		return attributes;
 	}
