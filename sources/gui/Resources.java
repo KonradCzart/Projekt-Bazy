@@ -30,6 +30,12 @@ public class Resources {
 		} else
 			return new ArrayList<String>(Arrays.asList("BŁAD"));
 	}
+	
+//	static ArrayList<String> getAttributes(String subcategory) {
+//		if(subcategory.equals("Samochody osobowe")) {
+//			return new ArrayList<String>(Arrays.asList("Umowa o pracę", "Umowa zlecenie", "Umowa o dzieło"));
+//		}
+//	}
 
 	static ArrayList<String> getCondition() {
 		return new ArrayList<String>(Arrays.asList("nowy", "używany", "dowolny"));

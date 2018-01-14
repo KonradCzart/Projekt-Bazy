@@ -392,10 +392,10 @@ public class MainWindowController {
 			
 		}
 		else if(subcategory.equals("Motocykle")) {
-			ComboBox<String> typeBox = new ComboBox<>();
-			typeBox.getItems().setAll(FXCollections.observableArrayList(getCarTypes()));
-			typeBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-			typeBox.setPromptText("typ");
+			ComboBox<String> makesBox = new ComboBox<>();
+			makesBox.getItems().setAll(FXCollections.observableArrayList(Resources.getMotorcycleMakes()));
+			makesBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			makesBox.setPromptText("marka");
 			
 			TextField minYear = new TextField();
 			minYear.setPromptText("rok prod. od");
@@ -408,7 +408,7 @@ public class MainWindowController {
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
-			attributesGrid.add(typeBox, 1, 0);
+			attributesGrid.add(makesBox, 1, 0);
 			attributesGrid.add(conditionBox, 1, 1);			
 			attributesGrid.add(minYear, 2, 0);
 			attributesGrid.add(maxYear, 2, 1);
