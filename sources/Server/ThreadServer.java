@@ -389,7 +389,7 @@ public class ThreadServer implements Runnable {
 				        			continue;
 				        		else if(key.equals("cena"))
 				        			continue;
-				        		
+				        		System.out.println(key + "  " + value);
 				        		adminConnection.addAttribute(productID, key, value);
 				        		//System.out.println(key + "  " + value);
 							}

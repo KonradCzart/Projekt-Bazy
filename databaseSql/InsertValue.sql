@@ -7,7 +7,6 @@ INSERT INTO category(Name, Description) VALUES ("Praca" , "Kategoria związana z
 INSERT INTO category(Name, Description) VALUES ("Książki" , "Kategoria związana z literaturą");
 INSERT INTO category(Name, Description) VALUES ("Nieruchomości" , "Kategoria związana z miejscami do zamieszkania");
 
-
 INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Samochody osobowe" , "", 1);
 INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Samochody ciężarowe" , "", 1);
 INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Motocykle" , "", 1);
@@ -20,8 +19,7 @@ INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Telewizory"
 
 INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Ubrania" , "", 3);
 INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Buty" , "", 3);
-INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Bielizna" , "", 3);
-INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Biżuteria" , "", 3);
+INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Dodatki" , "", 3);
 
 INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Domowe" , "", 4);
 INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Gospodarcze" , "", 4);
@@ -44,7 +42,6 @@ INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Czasopisma"
 INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Działki" , "", 8);
 INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Domy" , "", 8);
 INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Mieszkania" , "", 8);
-INSERT INTO subcategory(Name , Description, ParentCategory) VALUES ("Wynajem" , "", 8);
 
 INSERT INTO accounts VALUES ( 1, 1 , "Ma wszystkie możliwe prawa, zarządza całą aplikacją");
 INSERT INTO accounts VALUES ( 2, 2 , "Ma prawa do zmian oraz do akceptowania ogłoszeń");

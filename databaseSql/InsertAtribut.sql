@@ -143,15 +143,15 @@ INSERT INTO attributes (Name, Value) VALUES ( "rodzaj" , "Inne");
 INSERT INTO attributes (Name, Value) VALUES ( "rodzaj oferty" , "Sprzedaż");
 INSERT INTO attributes (Name, Value) VALUES ( "rodzaj oferty" , "Wynajem");
 
-INSERT INTO attributes (Name, Value) VALUES ( "powierzchnia" , "poniżej 50 tys");
-INSERT INTO attributes (Name, Value) VALUES ( "powierzchnia" , "50 - 150 tys");
-INSERT INTO attributes (Name, Value) VALUES ( "powierzchnia" , "150 - 250 tys");
-INSERT INTO attributes (Name, Value) VALUES ( "powierzchnia" , "powyżej 250 tys");
+INSERT INTO attributes (Name, Value) VALUES ( "przebieg" , "poniżej 50 tys");
+INSERT INTO attributes (Name, Value) VALUES ( "przebieg" , "50 - 150 tys");
+INSERT INTO attributes (Name, Value) VALUES ( "przebieg" , "150 - 250 tys");
+INSERT INTO attributes (Name, Value) VALUES ( "przebieg" , "powyżej 250 tys");
 
-INSERT INTO attributes (Name, Value) VALUES ( "przebieg" , "poniżej 500 m²");
-INSERT INTO attributes (Name, Value) VALUES ( "przebieg" , "500 - 1000 m²");
-INSERT INTO attributes (Name, Value) VALUES ( "przebieg" , "1000 - 2000 m²");
-INSERT INTO attributes (Name, Value) VALUES ( "przebieg" , "powyżej 2000 m²");
+INSERT INTO attributes (Name, Value) VALUES ( "powierzchnia" , "poniżej 500 m²");
+INSERT INTO attributes (Name, Value) VALUES ( "powierzchnia" , "500 - 1000 m²");
+INSERT INTO attributes (Name, Value) VALUES ( "powierzchnia" , "1000 - 2000 m²");
+INSERT INTO attributes (Name, Value) VALUES ( "powierzchnia" , "powyżej 2000 m²");
 
 INSERT INTO attributes (Name, Value) VALUES ( "powierzchnia" , "poniżej 50 m²");
 INSERT INTO attributes (Name, Value) VALUES ( "powierzchnia" , "50 - 100 m²");

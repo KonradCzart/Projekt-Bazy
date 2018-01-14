@@ -184,12 +184,8 @@ public class DataBaseConnection
 	
 	public PreparedStatement createOnePreparedStatement(String query, String inArg) throws SQLException
 	{
-		
-		System.out.println("aa");
-		if(myConnection == null)
-			System.out.println("aa");
+
 		PreparedStatement newStatement = myConnection.prepareStatement(query);
-		System.out.println("aa");
 		newStatement.setString(1, inArg);
 		
 		return newStatement;
@@ -269,7 +265,7 @@ public class DataBaseConnection
 		PreparedStatement prs = this.createOnePreparedStatement(query, subcategory);
 		
 		String out = this.executeOneString(prs);
-		System.out.println("out");
+		System.out.println(out);
 		int catID = Integer.parseInt(out);
 		int useID = 1;
 		
