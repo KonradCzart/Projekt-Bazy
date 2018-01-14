@@ -15,6 +15,7 @@ import DataBase.BadLoginException;
 import DataBase.DataBaseConnection;
 import Message.*;
 import gui.Announcement;
+import gui.AnnouncementData;
 import gui.AnnouncementInfo;
 
 /** 
@@ -414,14 +415,17 @@ public class ThreadServer implements Runnable {
 					else if(objectMessage instanceof ShowProductMessage)
 					{
 						ShowProductMessage showProduct = (ShowProductMessage) objectMessage;
-						//Map<String, String> attributes = showProduct.getAttributes();
-						Map<String, String> attributes = new HashMap<String,String>();
-						attributes.put("rodzaj", "damskie");
+						Map<String, String> attributes = showProduct.getAttributes();
+						//Map<String, String> attributes = new HashMap<String,String>();
+						//attributes.put("rodzaj", "damskie");
 						String subcategory = showProduct.getSubcategory();
 						int minYear = Integer.MIN_VALUE;
 						int maxYear = Integer.MAX_VALUE;
 						double minPrice = Double.MIN_VALUE;
 						double maxPrice = Double.MAX_VALUE;
+						
+						ArrayList<AnnouncementData> ad = new ArrayList<AnnouncementData>();
+						AnnouncementData tmp;
 						
 						if(attributes != null)
 						{
@@ -432,7 +436,28 @@ public class ThreadServer implements Runnable {
 							Set<String> keys = attributes.keySet();
 							for(String key : keys)
 							{
+								
 								String value = attributes.get(key);
+								if(key.equals("cena od"))
+								{
+									minPrice = Double.parseDouble(value);
+									continue;
+								}
+								else if(key.equals("cena do"))
+								{
+									maxPrice = Double.parseDouble(value);
+									continue;
+								}
+								else if(key.equals("rok prod. od"))
+								{
+									minYear = Integer.parseInt(value);
+									continue;
+								}
+								else if(key.equals("rok prod. do"))
+								{
+									maxYear = Integer.parseInt(value);
+									continue;
+								}
 								query = query + addAttribute+ "'" + value +"'"  + " and ";
 				        	}
 							query = query + "p.ProductYear between " + minYear + " and " + maxYear + " and ";
@@ -451,8 +476,16 @@ public class ThreadServer implements Runnable {
 									String sPrice = crs.getString(5);
 									double price = Double.parseDouble(sPrice);
 									
+									tmp = new AnnouncementData(id, date, productName, title, price);
+									ad.add(tmp);
+									
 									System.out.println(id + "  " + title + "  " + date + "  " + productName + "  " + price);
 								}
+								
+								AnnDataMessage dataMessage = new AnnDataMessage();
+								dataMessage.setArrayAD(ad);
+								
+								outStream.writeObject(dataMessage);
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -473,9 +506,16 @@ public class ThreadServer implements Runnable {
 									String productName = crs.getString(4);
 									String sPrice = crs.getString(5);
 									double price = Double.parseDouble(sPrice);
-									
+									tmp = new AnnouncementData(id, date, productName, title, price);
+									ad.add(tmp);
 									System.out.println(id + "  " + title + "  " + date + "  " + productName + "  " + price);
 								}
+								
+								AnnDataMessage dataMessage = new AnnDataMessage();
+								dataMessage.setArrayAD(ad);
+								
+								outStream.writeObject(dataMessage);
+								
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

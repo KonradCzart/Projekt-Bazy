@@ -103,6 +103,10 @@ public class ServerListener implements Runnable
 						myClient.getSettingWindow().setUserInformatorListener(login, firstName, lastName, salt);
 					});
 				}
+				else if(tmp instanceof SettingWindowMessage)
+				{
+					
+				}
 				
 	
 				
