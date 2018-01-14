@@ -250,7 +250,6 @@ public class DataBaseConnection
 		CallableStatement stmt= myConnection.prepareCall ("{call ChangePassword(?, ?, ?, ?)}");
 		stmt.setString(1, login);       
 	    stmt.setString(2, oldHashPassword);
-	    System.out.println("tuuuu");
 	    System.out.println(oldHashPassword);
 	    stmt.setString(3, newHashPassword);       
 	    stmt.setString(4, newSalt);
@@ -261,13 +260,10 @@ public class DataBaseConnection
 	
 	
 	
-	public void productAdd(String login, String location, String title, String productName, String description,  String condision, String subcategory, double price, int year) throws SQLException
+	public int productAdd(String login, String location, String title, String productName, String description,  String condision, String subcategory, double price, int year) throws SQLException
 	{
 		String query = "select id from subcategory where name = ?";
-		System.out.println(subcategory);
 		PreparedStatement prs = this.createOnePreparedStatement(query, subcategory);
-		if(prs == null)
-			System.out.println("aa");
 		
 		String out = this.executeOneString(prs);
 		
@@ -277,7 +273,7 @@ public class DataBaseConnection
 		if(condision.equals("nowa"))
 			useID = 2;
 		
-		CallableStatement stmt= myConnection.prepareCall ("{call InsertProduct(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+		CallableStatement stmt= myConnection.prepareCall ("{call InsertProduct(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 		stmt.setString(1, login);       
 	    stmt.setString(2, location);
 	    stmt.setString(3, title);       
@@ -287,7 +283,32 @@ public class DataBaseConnection
 	    stmt.setInt(7, useID);
 	    stmt.setInt(8, catID);
 	    stmt.setInt(9, year);
-	    
-	    stmt.executeQuery();
+	    stmt.registerOutParameter (10, Types.INTEGER);
+		stmt.execute();
+		int output = stmt.getInt (10);
+		
+		return output;
+	   
+	}
+	
+	public void addAttribute(int idProduct, String attributName, String attributValue) throws SQLException
+	{
+		String query = "select id from attributes where name = ? and value = ?";
+		ArrayList<String> array = new ArrayList<String>();
+		array.add(attributName);
+		array.add(attributValue);
+	
+		PreparedStatement prs = this.createPreparedStatement(query, 2, array);
+		String strAttribute = this.executeOneString(prs);
+		int idAttribute = 0;
+		idAttribute = Integer.parseInt(strAttribute);
+		CallableStatement stmt= myConnection.prepareCall ("{call InsertProductAttribute(?, ?)}");
+		stmt.setInt(1, idProduct);
+		stmt.setInt(2, idAttribute);
+		
+		stmt.execute();
+
+		
+		
 	}
 }

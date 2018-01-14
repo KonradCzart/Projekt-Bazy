@@ -61,7 +61,7 @@ DROP PROCEDURE IF EXISTS InsertProduct;
 
 DELIMITER //
 
-CREATE PROCEDURE InsertProduct (in login VARCHAR(30), in locationP VARCHAR(30), in title VARCHAR(60), in productName VARCHAR(30) , in descriptionProduct VARCHAR(300), in priceProduct DECIMAL(10, 2),in useStatus int, in subcategoryI INT, in yearP INT)
+CREATE PROCEDURE InsertProduct (in login VARCHAR(30), in locationP VARCHAR(30), in title VARCHAR(60), in productName VARCHAR(30) , in descriptionProduct VARCHAR(300), in priceProduct DECIMAL(10, 2),in useStatus int, in subcategoryI INT, in yearP INT, out res int )
 
 BEGIN
 	DECLARE idProduct int;
@@ -74,10 +74,22 @@ BEGIN
     INSERT INTO product(Name, Price, ProductYear, ProductCondition, Description) VALUES	( productName, priceProduct, yearP, useStatus, descriptionProduct);
     SET idProduct = LAST_INSERT_ID();
     INSERT INTO productcategory ( ProductID, SubcategoryID) VALUES ( idProduct, subcategoryI);
-    INSERT INTO announcements ( ProductID, UserName, Location, BeginDate, EndDate, Status) VALUES (idProduct, login, locationP, sDate, eDate, 1);
-    
+    INSERT INTO announcements ( ProductID, TitleName, UserName, Location, BeginDate, EndDate, Status) VALUES (idProduct, title, login,   locationP, sDate, eDate, 1);
+    SET res = idProduct;
+END; //
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS InsertProductAttribute;
+
+DELIMITER //
+
+CREATE PROCEDURE InsertProductAttribute (in idProduct INT, in idAttribute INT)
+
+BEGIN
+    INSERT INTO productattribute (ProductID, AttributeID) VALUES (idProduct, idAttribute );
 END; //
 
 DELIMITER ;
 call RegisterInsert ( 'kon', '123', 'aaaaaaa', 'konrad', 'czart', 123123123);
- call InsertProduct ( 'kon','Michałówka', 'Sprzedam auto osobowe' , 'audi b5bd', 'dasfasfasdasfasfdasda',  158545.25, 1, 1,2008);
+ call InsertProduct ( 'kon','Michałówkfa', 'Sprzedfam auto osobowe' , 'aufdi b5bd', 'dasfasffasdasfasfdasda',  158545.25, 1, 1,2008, @res);
