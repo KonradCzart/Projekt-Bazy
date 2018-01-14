@@ -358,7 +358,7 @@ public class ThreadServer implements Runnable {
 						String title = newAnnouncement.getTitle();
 						String productName = newAnnouncement.getProductName();
 						String subcategory = newAnnouncement.getSubcategory();
-						int year = 2018;
+						int year = 0;
 						String useProduct = "u¿ywany";
 						double price = 0;
 						
@@ -521,6 +521,56 @@ public class ThreadServer implements Runnable {
 								e.printStackTrace();
 							}
 						}
+					}
+					else if(objectMessage instanceof ConcretDataMessage)
+					{
+						ConcretDataMessage concret = (ConcretDataMessage) objectMessage;
+						String id = concret.getID();
+						
+						String query = "SELECT p.ID, a.TitleName,  p.Name, s.Name, c.Name, p.Price, p.Description, p.ProductCondition, p.ProductYear from announcements as a inner join product as p on a.ProductID = p.ID " +
+							"inner join productcategory as pc ON p.ID = pc.ProductID inner join subcategory as s on s.ID = pc.SubcategoryID inner join " +
+								"category as c on s.ParentCategory = c.ID where p.ID = " + id;
+					
+						try {
+							CachedRowSet crs = adminConnection.executeScrolResult(query);
+							
+							if(crs.next())
+							{
+								String title = crs.getString(2);
+								String productName = crs.getString(3);
+								String subcategory = crs.getString(4);
+								String category = crs.getString(5);
+								String sPrice = crs.getString(6);
+								String destription = crs.getString(7);
+								String condition = crs.getString(8);
+								String year = crs.getString(9);
+								Map<String, String> attributes = new HashMap<>();
+								
+								if(!year.equals("0"))
+									attributes.put("Rok", year);
+								
+								attributes.put("Cena", sPrice);
+								attributes.put("Stan", condition);
+								
+								query = "Select p.ID, att.Name, att.Value from product as p inner join productattribute as pa on p.ID = pa.ProductID " +
+										 "inner join attributes as att on pa.AttributeID = att.ID";
+								
+								CachedRowSet crs2 = adminConnection.executeScrolResult(query);
+								while(crs.next())
+								{
+
+									String attName = crs.getString(2);
+									String attValue = crs.getString(3);
+									attributes.put(attName, attValue);
+								}
+								Announcement tmp = new Announcement(productName, title, category, subcategory, attributes, destription);
+								outStream.writeObject(tmp);
+							}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 					}
 					//To dooooooooooooooooo
 				}

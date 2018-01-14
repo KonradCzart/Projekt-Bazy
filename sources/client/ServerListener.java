@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Message.*;
+import gui.Announcement;
 import gui.AnnouncementData;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -114,8 +115,15 @@ public class ServerListener implements Runnable
 						myClient.getMainWindow().updateAnnouncementsTable(ad);
 					});
 				}
+				else if(tmp instanceof Announcement)
+				{
+					Announcement ann = (Announcement) tmp;
+					Platform.runLater(() -> {
+						myClient.getMainWindow().showAnnouncement(ann);
+					});
+				}
 				
-	
+				
 				
 			}
 			

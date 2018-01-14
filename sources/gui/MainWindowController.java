@@ -13,6 +13,7 @@ import java.util.Observable;
 
 import org.omg.CORBA.INITIALIZE;
 
+import Message.ConcretDataMessage;
 import Message.ShowProductMessage;
 import client.Client;
 import javafx.application.Platform;
@@ -203,7 +204,14 @@ public class MainWindowController {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					AnnouncementInfo rowData = row.getItem();
 					System.out.println(rowData.getTitle());
-					//showAnnouncement(rowData);
+					ConcretDataMessage concret = new ConcretDataMessage(rowData.getID());
+					
+					try {
+						client.sendMessage(concret);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			});
 			return row;
@@ -243,9 +251,9 @@ public class MainWindowController {
 		return chosenSubcategory;
 	}
 	
-	void showAnnouncement(Announcement announcement) {
+	public void showAnnouncement(Announcement announcement) {
 		
-		
+		System.out.println("aaaaa show");
 		Stage stage = (Stage) myAccountButton.getScene().getWindow();
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowAnnouncementWindow.fxml"));
