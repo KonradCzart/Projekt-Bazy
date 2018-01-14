@@ -55,14 +55,24 @@ public class AddAnnouncementWindowController {
 		String title = titleField.getText();
 		String product = productName.getText();
 		String description = descriptionTextArea.getText();
-		if(!title.isEmpty() && !product.isEmpty() && !description.isEmpty() && !subcategoryBox.getSelectionModel().isEmpty()) {
+		if(!title.isEmpty() && !product.isEmpty() && !description.isEmpty() && !subcategoryBox.getSelectionModel().isEmpty()) 
+		{
 			String category = categoryBox.getValue();
 			String subcategory = subcategoryBox.getValue();
 	        attributes = getAttributes();
 	        if(attributes != null) {
 	        	//newAnnouncement = new Announcement(new AnnouncementInfo(null, product, title, -1), category, subcategory, attributes, description);
 	        	//DATA I CENA NULLAMI
+	        	
+	        	for(Map.Entry<String, String> tmp : attributes.entrySet())
+	        	{
+	        		String key = tmp.getKey();
+	        		String value = tmp.getValue();
+	        		System.out.println(key + "  " + value);
+	        	}
 	        }
+	        else
+	        	System.out.println("Nie wszystkie argumenty!");
 		}
 	}
 
