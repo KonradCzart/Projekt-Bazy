@@ -323,6 +323,8 @@ public class MainWindowController {
 	boolean isUserLoggedIn() {
 		return Window.isLoggedIn;
 	}
+	
+	Button showButton;
 
 	String chosenSubcategory;
 	
@@ -841,6 +843,19 @@ public class MainWindowController {
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
 		}
+		
+		showButton = new Button();
+		showButton.setText("Pokaż");
+		showButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		showButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				//sendToServerShowProduct(chosenSubcategory, getAttributes());
+			}
+
+		});
+		attributesGrid.add(showButton, 3, 2);
 	}
 
 	@FXML
