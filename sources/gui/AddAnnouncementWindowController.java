@@ -89,6 +89,7 @@ public class AddAnnouncementWindowController {
 	void clearAnnouncement() {
 		titleField.clear();
 		productName.clear();
+		price.clear();
 		categoryBox.getSelectionModel().clearSelection();
 		subcategoryBox.getSelectionModel().clearSelection();
 		attributesGrid.getChildren().clear();
@@ -156,8 +157,12 @@ public class AddAnnouncementWindowController {
 		categoryBox.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+				try {
 				subcategoryBox.getItems().setAll(Resources.getSubcategories(arg2));
-				subcategoryBox.setValue(Resources.getSubcategories(arg2).get(0));
+				subcategoryBox.setValue(Resources.getSubcategories(arg2).get(0));}
+				catch(Exception e) {
+					
+				}
 			}
 		});
 
@@ -165,7 +170,12 @@ public class AddAnnouncementWindowController {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				updateAttributes(newValue);
+				try {
+					updateAttributes(newValue);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
 			}
 		});
 	}
