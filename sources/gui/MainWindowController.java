@@ -22,6 +22,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -260,11 +261,13 @@ public class MainWindowController {
 		stage.show();
 	}
 	
+	ObservableList<AnnouncementInfo> getAnnouncementInfoList() {
+		//Zapytanie do bazy
+		return null;
+	}
+	
 	Announcement getAnnouncement(AnnouncementInfo info) {
 		//pobieranie ogłoszenia z bazy
-<<<<<<< HEAD
-		return new Announcement(info.getProductName(), info.getTitle(), getChosenCategory(), getChosenSubcategory(), null, "SAGDGDSGS");
-=======
 		return new Announcement(info.getProductName(), info.getTitle(), getChosenCategory(), getChosenSubcategory(), getAttributes(), "SAGDGDSGS");
 	}
 	
@@ -288,7 +291,6 @@ public class MainWindowController {
 			//fsd
 		}
 		return attributes;
->>>>>>> branch 'master' of https://github.com/MatCoder77/Projekt-Bazy
 	}
 	
 	private ObservableList<AnnouncementInfo> announcementsList;
