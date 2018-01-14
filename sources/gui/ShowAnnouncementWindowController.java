@@ -1,12 +1,14 @@
 package gui;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -70,7 +72,26 @@ public class ShowAnnouncementWindowController {
 		productNameField.setText(announcement.getProductName());
 		categoryField.setText(announcement.getCategory());
 		subcategoryField.setText(announcement.getSubcategory());
-		//fill attribute grid
+		displayAttributes();
 		descriptionTextArea.setText(announcement.getDescription());
+	}
+	
+	void displayAttributes() {
+		TextField tf;
+		Label lb;
+		int i = 0;
+		for(Map.Entry<String, String> a : announcement.getAttributes().entrySet()) {
+			lb = new Label();
+			lb.setText(a.getKey());
+			lb.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			
+			tf = new TextField();
+			tf.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			tf.setText(a.getValue());
+			
+			attributesGrid.add(lb, i, 0);
+			attributesGrid.add(tf, i, 1);
+			i++;
+		}
 	}
 }

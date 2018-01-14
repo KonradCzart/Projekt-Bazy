@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 import org.omg.CORBA.INITIALIZE;
@@ -18,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -256,9 +259,35 @@ public class MainWindowController {
 		stage.show();
 	}
 	
+	ObservableList<AnnouncementInfo> getAnnouncementInfoList() {
+		//Zapytanie do bazy
+		return null;
+	}
+	
 	Announcement getAnnouncement(AnnouncementInfo info) {
 		//pobieranie ogłoszenia z bazy
-		return new Announcement(info.getProductName(), info.getTitle(), getChosenCategory(), getChosenSubcategory(), null, "SAGDGDSGS");
+		return new Announcement(info.getProductName(), info.getTitle(), getChosenCategory(), getChosenSubcategory(), getAttributes(), "SAGDGDSGS");
+	}
+	
+	@SuppressWarnings("unchecked")
+	Map<String, String> getAttributes() {
+		HashMap<String, String> attributes = new HashMap<>();
+		TextField tf;
+		ComboBox<String> cb;
+		for(Node a : attributesGrid.getChildren()) {
+			if(a instanceof TextField) {
+				tf = (TextField) a;
+				attributes.put(tf.getPromptText(), tf.getText().trim());
+			}
+			else {
+				cb = (ComboBox<String>) a;
+				if(cb.getSelectionModel().isEmpty())
+					attributes.put(cb.getPromptText(), "");
+				else
+					attributes.put(cb.getPromptText(), cb.getValue());
+			}
+		}
+		return attributes;
 	}
 	
 	private ObservableList<AnnouncementInfo> announcementsList;
