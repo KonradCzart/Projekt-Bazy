@@ -423,7 +423,7 @@ public class MainWindowController {
 	{
 		ShowProductMessage showProduct = new ShowProductMessage();
 		showProduct.setSubcategory(subcategory);
-		showProduct.setAttributes(null);
+		showProduct.setAttributes(attributes);
 		
 		try {
 			client.sendMessage(showProduct);
