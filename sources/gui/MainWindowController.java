@@ -288,13 +288,12 @@ public class MainWindowController {
 		for(Node a : attributesGrid.getChildren()) {
 			if(a instanceof TextField) {
 				tf = (TextField) a;
-				attributes.put(tf.getPromptText(), tf.getText().trim());
+				if(!tf.getText().isEmpty())
+					attributes.put(tf.getPromptText(), tf.getText().trim());
 			}
-			else {
+			else if(a instanceof ComboBox){
 				cb = (ComboBox<String>) a;
-				if(cb.getSelectionModel().isEmpty())
-					attributes.put(cb.getPromptText(), "");
-				else
+				if(!cb.getSelectionModel().isEmpty())
 					attributes.put(cb.getPromptText(), cb.getValue());
 			}
 			//fsd
