@@ -212,7 +212,7 @@ public class MainWindowController {
 		productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
 		titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
 		priceColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
-		AnnouncementInfo a1 = new AnnouncementInfo();
+		/*AnnouncementInfo a1 = new AnnouncementInfo();
 		a1.setStartDate(new Date(118, 6, 12));
 		a1.setProductName("Audi R8");
 		a1.setTitle("Wszystkie na to lecą!!!");
@@ -227,7 +227,7 @@ public class MainWindowController {
 		ArrayList<AnnouncementInfo> alist = new ArrayList<>(Arrays.asList(a1, a2, new AnnouncementInfo("2017-03-19", "Harnaś", "Skrzynka piwa Harnaś", 11.47)));
 		announcementsList = FXCollections.observableArrayList(alist);
 		setAnnouncements(announcementsList);
-		addAnnauncement(new AnnouncementInfo("2017-09-16", "Perłą", "Najlepsze piwo", 2.49));
+		addAnnauncement(new AnnouncementInfo("2017-09-16", "Perłą", "Najlepsze piwo", 2.49));*/
 		
 		if(isUserLoggedIn()) {
 			
@@ -295,9 +295,11 @@ public class MainWindowController {
 	}
 	
 	void updateAnnouncementsTable(ArrayList<AnnouncementData> data) {
+		ArrayList<AnnouncementInfo> announcements = new ArrayList<>();
 		for(AnnouncementData a : data) {
-			//addAnnauncement(new AnnouncementInfo(a.id), date, productName, title, price));
+			announcements.add(new AnnouncementInfo(a.getID(), a.getDate(), a.getProductName(), a.getTitle(), a.getPrice()));
 		}
+		setAnnouncements(FXCollections.observableArrayList(announcements));
 	}
 	
 	private ObservableList<AnnouncementInfo> announcementsList;
