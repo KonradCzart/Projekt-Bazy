@@ -294,6 +294,12 @@ public class MainWindowController {
 		return attributes;
 	}
 	
+	void updateAnnouncementsTable(ArrayList<AnnouncementData> data) {
+		for(AnnouncementData a : data) {
+			//addAnnauncement(new AnnouncementInfo(a.id), date, productName, title, price));
+		}
+	}
+	
 	private ObservableList<AnnouncementInfo> announcementsList;
 	
 	void setAnnouncements(ObservableList<AnnouncementInfo> list) {
