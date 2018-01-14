@@ -69,6 +69,10 @@ public class ServerListener implements Runnable
 					{
 						myClient.getSettingWindow().errorDialogListener(dectription);
 					}
+					else if(failCode == 6)
+					{
+						myClient.getAddAnnouncementWindow().errorDialogListener(dectription);
+					}
 				}
 				else if(tmp instanceof SuccessMessage)
 				{
@@ -81,6 +85,10 @@ public class ServerListener implements Runnable
 					{
 						String salt = success.getDescription2();
 						myClient.getSettingWindow().successDialogListener(dectription, salt);
+					}
+					if(successCode == 6)
+					{
+						myClient.getAddAnnouncementWindow().successDialogListener(dectription);
 					}
 				}
 				else if(tmp instanceof SettingWindowMessage)

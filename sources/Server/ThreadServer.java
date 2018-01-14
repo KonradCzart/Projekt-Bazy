@@ -363,21 +363,23 @@ public class ThreadServer implements Runnable {
 						
 						Map<String, String> attributes = newAnnouncement.getAttributes();
 						
-						Set<String> keys = attributes.keySet();
-						for(String key : keys)
-						{
-							String value = attributes.get(key);
-							System.out.println(key + "  " + value);
-			        		if(key.equals("rok produkcji"))
-			        			year = Integer.parseInt(value);
-			        		else if(key.equals("stan"))
-			        			useProduct = value;
-			        		else if(key.equals("cena"))
-			        			price = Double.parseDouble(value);
 
-			        	}
 						
 						try {
+							
+							Set<String> keys = attributes.keySet();
+							for(String key : keys)
+							{
+								String value = attributes.get(key);
+								System.out.println(key + "  " + value);
+				        		if(key.equals("rok produkcji"))
+				        			year = Integer.parseInt(value);
+				        		else if(key.equals("stan"))
+				        			useProduct = value;
+				        		else if(key.equals("cena"))
+				        			price = Double.parseDouble(value);
+
+				        	}
 							int productID = adminConnection.productAdd(name, localization, title, productName, description, useProduct,subcategory, price, year);
 							for(String key : keys)
 							{
@@ -392,14 +394,93 @@ public class ThreadServer implements Runnable {
 				        		System.out.println(key + "  " + value);
 				        		adminConnection.addAttribute(productID, key, value);
 				        		//System.out.println(key + "  " + value);
+				        		
 							}
+							
+							SuccessMessage success = new SuccessMessage(6, "Og³oszenie zosta³o dodane!");
+							outStream.writeObject(success);
 						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							FailMessage fail = new FailMessage(6, "Nieuda³o siê dodaæ og³oszenia!");
+							outStream.writeObject(fail);
+						} catch (NumberFormatException e)
+						{
+							FailMessage fail = new FailMessage(6, "Niepoprawne dane og³oszenia!");
+							outStream.writeObject(fail);
 						}
 			        	
 						
 			        	//System.out.println(price + "---" + year +"---" + title + "---" + useProduct + "---" + productName);
+					}
+					else if(objectMessage instanceof ShowProductMessage)
+					{
+						ShowProductMessage showProduct = (ShowProductMessage) objectMessage;
+						//Map<String, String> attributes = showProduct.getAttributes();
+						Map<String, String> attributes = new HashMap<String,String>();
+						attributes.put("rodzaj", "damskie");
+						String subcategory = showProduct.getSubcategory();
+						int minYear = Integer.MIN_VALUE;
+						int maxYear = Integer.MAX_VALUE;
+						double minPrice = Double.MIN_VALUE;
+						double maxPrice = Double.MAX_VALUE;
+						
+						if(attributes != null)
+						{
+							String query = "SELECT p.ID, a.TitleName, a.BeginDate, p.Name, p.Price from announcements as a inner join product as p on a.ProductID = p.ID " +  
+										"inner join productcategory as pc ON p.ID = pc.ProductID inner join subcategory as s on s.ID = pc.SubcategoryID inner join productattribute as pa " +
+										"ON p.ID = pa.ProductID inner JOIN attributes as att on pa.AttributeID = att.ID where ";
+							String addAttribute = "att.Value = ";
+							Set<String> keys = attributes.keySet();
+							for(String key : keys)
+							{
+								String value = attributes.get(key);
+								query = query + addAttribute+ "'" + value +"'"  + " and ";
+				        	}
+							query = query + "p.ProductYear between " + minYear + " and " + maxYear + " and ";
+							query = query + "p.Price between " + minPrice + " and " + maxPrice + " and ";
+							query = query + " s.Name = " +  "'" +subcategory+ "'";
+							System.out.println(query);
+							try {
+								
+								CachedRowSet crs = adminConnection.executeScrolResult(query);
+								while(crs.next())
+								{
+									String id = crs.getString(1);
+									String title = crs.getString(2);
+									String date = crs.getString(3);
+									String productName = crs.getString(4);
+									String sPrice = crs.getString(5);
+									double price = Double.parseDouble(sPrice);
+									
+									System.out.println(id + "  " + title + "  " + date + "  " + productName + "  " + price);
+								}
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						else
+						{
+							String query = "SELECT p.ID, a.TitleName, a.BeginDate, p.Name, p.Price from announcements as a inner join product as p on a.ProductID = p.ID "+
+									"inner join productcategory as pc ON p.ID = pc.ProductID inner join subcategory as s on s.ID = pc.SubcategoryID where s.Name = ?";
+							try {
+								PreparedStatement stm = adminConnection.createOnePreparedStatement(query, subcategory);
+								CachedRowSet crs = adminConnection.executePreparedStatement(stm);
+								while(crs.next())
+								{
+									String id = crs.getString(1);
+									String title = crs.getString(2);
+									String date = crs.getString(3);
+									String productName = crs.getString(4);
+									String sPrice = crs.getString(5);
+									double price = Double.parseDouble(sPrice);
+									
+									System.out.println(id + "  " + title + "  " + date + "  " + productName + "  " + price);
+								}
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
 					}
 					//To dooooooooooooooooo
 				}

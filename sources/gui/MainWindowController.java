@@ -5,10 +5,12 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Observable;
 
 import org.omg.CORBA.INITIALIZE;
 
+import Message.ShowProductMessage;
 import client.Client;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -360,13 +362,30 @@ public class MainWindowController {
 					public void handle(ActionEvent event) {
 						updateAttributes(mySubcategory);
 						chosenSubcategory = mySubcategory;
+						
+						sendToServerShowProduct(chosenSubcategory, null);
 					}
 
 				});
 			}
 		}
 	}
-
+	
+	private void sendToServerShowProduct(String subcategory, Map<String, String> attributes)
+	{
+		ShowProductMessage showProduct = new ShowProductMessage();
+		showProduct.setSubcategory(subcategory);
+		showProduct.setAttributes(null);
+		
+		try {
+			client.sendMessage(showProduct);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	private void updateAttributes(String subcategory) {
 		if (subcategory.equals("Samochody osobowe")) {
 			ComboBox<String> makesBox = new ComboBox<>();

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import client.Client;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -180,6 +182,31 @@ public class AddAnnouncementWindowController {
 		});
 	}
 
+	public void errorDialogListener(String errorMessage)
+	{
+		Platform.runLater(() -> {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("");
+			alert.setContentText(errorMessage);
+
+			alert.showAndWait();
+		});
+	}
+	
+	public void successDialogListener(String successMessage)
+	{
+		Platform.runLater(() -> {
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Success");
+			alert.setHeaderText("");
+			alert.setContentText(successMessage);
+
+			alert.showAndWait();
+		});
+
+	}
 	private void updateAttributes(String subcategory) {
 		if (subcategory.equals("Samochody osobowe")) {
 			ComboBox<String> makesBox = new ComboBox<>();
