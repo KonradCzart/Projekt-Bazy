@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import client.Client;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,6 +24,13 @@ import javafx.stage.Stage;
 public class AddAnnouncementWindowController {
 	@FXML
 	private GridPane attributesGrid;
+	private Client client;
+	
+	public AddAnnouncementWindowController()
+	{
+		this.client = Window.client;
+		this.client.setAddAnnouncementWindow(this);
+	}
 
 	TextField price;
 	ComboBox<String> conditionBox;
@@ -61,15 +69,16 @@ public class AddAnnouncementWindowController {
 			String subcategory = subcategoryBox.getValue();
 	        attributes = getAttributes();
 	        if(attributes != null) {
-	        	newAnnouncement = new Announcement(new AnnouncementInfo(null, product, title, -1), category, subcategory, attributes, description);
+	        	newAnnouncement = new Announcement(product, title,  category, subcategory, attributes, description);
 	        	//DATA I CENA NULLAMI
 	        	
-	        	for(Map.Entry<String, String> tmp : attributes.entrySet())
-	        	{
-	        		String key = tmp.getKey();
-	        		String value = tmp.getValue();
-	        		System.out.println(key + "  " + value);
-	        	}
+	        	try {
+					client.sendMessage(newAnnouncement);
+				} catch (IOException e) {
+					System.out.println("Nie wys³ano!");
+					e.printStackTrace();
+				}
+	        	
 	        }
 	        else
 	        	System.out.println("Nie wszystkie argumenty!");

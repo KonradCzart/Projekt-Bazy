@@ -262,11 +262,14 @@ public class DataBaseConnection
 	
 	public int productAdd(String login, String location, String title, String productName, String description,  String condision, String subcategory, double price, int year) throws SQLException
 	{
+		System.out.println("tuuuu");
+		
+		
 		String query = "select id from subcategory where name = ?";
 		PreparedStatement prs = this.createOnePreparedStatement(query, subcategory);
 		
 		String out = this.executeOneString(prs);
-		
+		System.out.println("out");
 		int catID = Integer.parseInt(out);
 		int useID = 1;
 		

@@ -2,13 +2,18 @@ package gui;
 
 import java.sql.Date;
 
+import Message.Message;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class AnnouncementInfo {
+public class AnnouncementInfo implements Message{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3433820180281149593L;
 	private SimpleObjectProperty<Date> startDate;
 	private StringProperty productName;
 	private StringProperty title;

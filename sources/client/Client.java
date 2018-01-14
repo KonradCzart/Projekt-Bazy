@@ -22,6 +22,7 @@ public class Client
 	private MySettingsWindowController settingWindow;
 	private SignInOrRegisterController registerWindow;
 	private SignInOrRegisterController2 registerToBasaWindow;
+	private AddAnnouncementWindowController addAnnouncementWindow;
 
 
 	private static final int DEFAULT_PORT = 8189;
@@ -70,6 +71,14 @@ public class Client
 	
 	
 	
+	public AddAnnouncementWindowController getAddAnnouncementWindow() {
+		return addAnnouncementWindow;
+	}
+
+	public void setAddAnnouncementWindow(AddAnnouncementWindowController addAnnouncementWindow) {
+		this.addAnnouncementWindow = addAnnouncementWindow;
+	}
+
 	public MainWindowController getMainWindow() {
 		return mainWindow;
 	}

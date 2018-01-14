@@ -14,6 +14,8 @@ import DataBase.AccountsStatus;
 import DataBase.BadLoginException;
 import DataBase.DataBaseConnection;
 import Message.*;
+import gui.Announcement;
+import gui.AnnouncementInfo;
 
 /** 
 * @author Konrad Czart
@@ -346,6 +348,58 @@ public class ThreadServer implements Runnable {
 							outStream.writeObject(fail);
 							e.printStackTrace();
 						}
+					}
+					else if(objectMessage instanceof Announcement)
+					{
+						Announcement newAnnouncement = (Announcement) objectMessage;
+						String localization = "pusta";
+						String description = newAnnouncement.getDescription();
+						String title = newAnnouncement.getTitle();
+						String productName = newAnnouncement.getProductName();
+						String subcategory = newAnnouncement.getSubcategory();
+						int year = 2018;
+						String useProduct = "u¿ywany";
+						double price = 0;
+						
+						Map<String, String> attributes = newAnnouncement.getAttributes();
+						
+						Set<String> keys = attributes.keySet();
+						for(String key : keys)
+						{
+							String value = attributes.get(key);
+							System.out.println(key + "  " + value);
+			        		if(key.equals("rok produkcji"))
+			        			year = Integer.parseInt(value);
+			        		else if(key.equals("stan"))
+			        			useProduct = value;
+			        		else if(key.equals("cena"))
+			        			price = Double.parseDouble(value);
+
+			        	}
+						
+						try {
+							int productID = adminConnection.productAdd(name, localization, title, productName, description, useProduct,subcategory, price, year);
+							for(String key : keys)
+							{
+								String value = attributes.get(key);
+				        		
+				        		if(key.equals("rok produkcji"))
+				        			continue;
+				        		else if(key.equals("stan"))
+				        			continue;
+				        		else if(key.equals("cena"))
+				        			continue;
+				        		
+				        		adminConnection.addAttribute(productID, key, value);
+				        		//System.out.println(key + "  " + value);
+							}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+			        	
+						
+			        	//System.out.println(price + "---" + year +"---" + title + "---" + useProduct + "---" + productName);
 					}
 					//To dooooooooooooooooo
 				}
