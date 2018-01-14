@@ -5,8 +5,10 @@ import java.io.ObjectInputStream;
 import java.net.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Message.*;
+import gui.AnnouncementData;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
@@ -103,9 +105,14 @@ public class ServerListener implements Runnable
 						myClient.getSettingWindow().setUserInformatorListener(login, firstName, lastName, salt);
 					});
 				}
-				else if(tmp instanceof SettingWindowMessage)
+				else if(tmp instanceof AnnDataMessage)
 				{
+					AnnDataMessage ann = (AnnDataMessage) tmp;
+					ArrayList<AnnouncementData> ad = ann.getArrayAD();
 					
+					Platform.runLater(() -> {
+						myClient.getMainWindow().updateAnnouncementsTable(ad);
+					});
 				}
 				
 	

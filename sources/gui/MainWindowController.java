@@ -294,7 +294,7 @@ public class MainWindowController {
 		return attributes;
 	}
 	
-	void updateAnnouncementsTable(ArrayList<AnnouncementData> data) {
+	public void updateAnnouncementsTable(ArrayList<AnnouncementData> data) {
 		ArrayList<AnnouncementInfo> announcements = new ArrayList<>();
 		for(AnnouncementData a : data) {
 			announcements.add(new AnnouncementInfo(a.getID(), a.getDate(), a.getProductName(), a.getTitle(), a.getPrice()));
