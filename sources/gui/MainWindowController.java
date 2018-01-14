@@ -229,6 +229,14 @@ public class MainWindowController {
 		
 	}
 	
+	String getChosenCategory() {
+		return categoryLabel.getText();
+	}
+	
+	String getChosenSubcategory() {
+		return chosenSubcategory;
+	}
+	
 	void showAnnouncement(AnnouncementInfo info) {
 		
 		
@@ -250,7 +258,7 @@ public class MainWindowController {
 	
 	Announcement getAnnouncement(AnnouncementInfo info) {
 		//pobieranie ogłoszenia z bazy
-		return new Announcement(info.getProductName(), info.getTitle(), "TMP cat", "TMP subcat", null, "SAGDGDSGS");
+		return new Announcement(info.getProductName(), info.getTitle(), getChosenCategory(), getChosenSubcategory(), null, "SAGDGDSGS");
 	}
 	
 	private ObservableList<AnnouncementInfo> announcementsList;
@@ -267,6 +275,8 @@ public class MainWindowController {
 		return Window.isLoggedIn;
 	}
 
+	String chosenSubcategory;
+	
 	@FXML
 	private Button myAccountButton;
 	
@@ -349,6 +359,7 @@ public class MainWindowController {
 					@Override
 					public void handle(ActionEvent event) {
 						updateAttributes(mySubcategory);
+						chosenSubcategory = mySubcategory;
 					}
 
 				});
