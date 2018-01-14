@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import DataBase.AccountsStatus;
 import Message.*;
 import gui.Announcement;
 import gui.AnnouncementData;
@@ -101,9 +102,10 @@ public class ServerListener implements Runnable
 					String firstName = setting.getFirstName();
 					String lastName = setting.getLastName();
 					String salt = setting.getSalt();
+					AccountsStatus ast = setting.getAccountStatus();
 					
 					Platform.runLater(() -> {
-						myClient.getSettingWindow().setUserInformatorListener(login, firstName, lastName, salt);
+						myClient.getSettingWindow().setUserInformatorListener(login, firstName, lastName, salt, ast);
 					});
 				}
 				else if(tmp instanceof AnnDataMessage)
@@ -118,6 +120,7 @@ public class ServerListener implements Runnable
 				else if(tmp instanceof Announcement)
 				{
 					Announcement ann = (Announcement) tmp;
+					
 					Platform.runLater(() -> {
 						myClient.getMainWindow().showAnnouncement(ann);
 					});

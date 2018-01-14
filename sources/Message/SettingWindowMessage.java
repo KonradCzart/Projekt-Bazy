@@ -1,5 +1,7 @@
 package Message;
 
+import DataBase.AccountsStatus;
+
 public class SettingWindowMessage implements Message{
 
 	/**
@@ -11,7 +13,16 @@ public class SettingWindowMessage implements Message{
 	private String firstName;
 	private String lastName;
 	private String salt;
+	private AccountsStatus accountStatus;
 	
+	
+	
+	public AccountsStatus getAccountStatus() {
+		return accountStatus;
+	}
+	public void setAccountStatus(AccountsStatus accountStatus) {
+		this.accountStatus = accountStatus;
+	}
 	public String getSalt() {
 		return salt;
 	}

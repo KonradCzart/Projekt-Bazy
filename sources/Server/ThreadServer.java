@@ -325,6 +325,7 @@ public class ThreadServer implements Runnable {
 								settingMessage.setFirstName(firstName);
 								settingMessage.setLastName(lastName);
 								settingMessage.setSalt(salt);
+								settingMessage.setAccountStatus(myStatus);
 								outStream.writeObject(settingMessage);
 							}
 						} catch (SQLException e) {

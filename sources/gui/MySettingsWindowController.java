@@ -90,11 +90,11 @@ public class MySettingsWindowController {
 	
 	@FXML
 	private void initialize() {
-		accountStatus = AccountsStatus.USER;
-		if(accountStatus != AccountsStatus.ADMIN) {
-			backupRestoreSection.setCollapsible(false);
-			backupRestoreSection.setText("");
-		}
+//		accountStatus = AccountsStatus.USER;
+//		if(accountStatus != AccountsStatus.ADMIN) {
+//			backupRestoreSection.setCollapsible(false);
+//			backupRestoreSection.setText("");
+//		}
 	}
 
 	@FXML
@@ -178,12 +178,17 @@ public class MySettingsWindowController {
 		this.client = client;
 	}
 	
-	public void setUserInformatorListener(String login, String firstName, String lastName, String salt)
+	public void setUserInformatorListener(String login, String firstName, String lastName, String salt, AccountsStatus status)
 	{
 		userLoginField.setText(login);
 		userNameField.setText(firstName);
 		userSurnameField.setText(lastName);
 		this.oldSalt = salt;
+		accountStatus = status;
+		if(accountStatus != AccountsStatus.ADMIN) {
+			backupRestoreSection.setCollapsible(false);
+			backupRestoreSection.setText("");
+		}
 	}
 	
 	public void errorDialogListener(String errorMessage)
@@ -204,6 +209,7 @@ public class MySettingsWindowController {
 		this.newPasswordField.setText("");
 		this.newPasswordField2.setText("");
 		this.currentPasswordField.setText("");
+		
 		Platform.runLater(() -> {
 
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
