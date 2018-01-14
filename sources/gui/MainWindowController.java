@@ -5,10 +5,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-<<<<<<< HEAD
-=======
 import java.util.HashMap;
->>>>>>> branch 'master' of https://github.com/MatCoder77/Projekt-Bazy
 import java.util.Map;
 import java.util.Observable;
 
