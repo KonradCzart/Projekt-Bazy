@@ -851,7 +851,7 @@ public class MainWindowController {
 
 			@Override
 			public void handle(ActionEvent event) {
-				//sendToServerShowProduct(chosenSubcategory, getAttributes());
+				sendToServerShowProduct(chosenSubcategory, getAttributes());
 			}
 
 		});
