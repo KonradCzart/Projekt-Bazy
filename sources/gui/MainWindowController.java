@@ -262,7 +262,33 @@ public class MainWindowController {
 	
 	Announcement getAnnouncement(AnnouncementInfo info) {
 		//pobieranie ogłoszenia z bazy
+<<<<<<< HEAD
 		return new Announcement(info.getProductName(), info.getTitle(), getChosenCategory(), getChosenSubcategory(), null, "SAGDGDSGS");
+=======
+		return new Announcement(info.getProductName(), info.getTitle(), getChosenCategory(), getChosenSubcategory(), getAttributes(), "SAGDGDSGS");
+	}
+	
+	@SuppressWarnings("unchecked")
+	Map<String, String> getAttributes() {
+		HashMap<String, String> attributes = new HashMap<>();
+		TextField tf;
+		ComboBox<String> cb;
+		for(Node a : attributesGrid.getChildren()) {
+			if(a instanceof TextField) {
+				tf = (TextField) a;
+				attributes.put(tf.getPromptText(), tf.getText().trim());
+			}
+			else {
+				cb = (ComboBox<String>) a;
+				if(cb.getSelectionModel().isEmpty())
+					attributes.put(cb.getPromptText(), "");
+				else
+					attributes.put(cb.getPromptText(), cb.getValue());
+			}
+			//fsd
+		}
+		return attributes;
+>>>>>>> branch 'master' of https://github.com/MatCoder77/Projekt-Bazy
 	}
 	
 	private ObservableList<AnnouncementInfo> announcementsList;
