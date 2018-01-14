@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.sql.rowset.CachedRowSet;
 
+import com.mysql.jdbc.NotUpdatable;
+
 import DataBase.AccountsStatus;
 import DataBase.BadLoginException;
 import DataBase.DataBaseConnection;
@@ -431,81 +433,72 @@ public class ThreadServer implements Runnable {
 						
 						if(attributes != null)
 						{
-							
-							String query = "SELECT DISTINCT p.ID, a.TitleName, a.BeginDate, p.Name, p.Price from announcements as a inner join product as p on a.ProductID = p.ID " +  
-										"inner join productcategory as pc ON p.ID = pc.ProductID inner join subcategory as s on s.ID = pc.SubcategoryID left join productattribute as pa " +
-										"ON p.ID = pa.ProductID left join attributes as att on pa.AttributeID = att.ID where ";
-							String addAttribute = "att.Value = ";
-							Set<String> keys = attributes.keySet();
-							for(String key : keys)
-							{
-								
-								String value = attributes.get(key);
-								if(key.equals("cena od"))
-								{
-									minPrice = Double.parseDouble(value);
-									continue;
-								}
-								else if(key.equals("cena do"))
-								{
-									maxPrice = Double.parseDouble(value);
-									continue;
-								}
-								else if(key.equals("rok prod. od"))
-								{
-									minYear = Integer.parseInt(value);
-									continue;
-								}
-								else if(key.equals("rok prod. do"))
-								{
-									maxYear = Integer.parseInt(value);
-									continue;
-								}
-								else if(key.equals("stan"))
-								{
-									if(value.equals("u¿ywany"))
-									{
-										useProduct  = "USED";
-										use = true;
-									}
-									else {
-										use = true;
-										useProduct = "NEW";
-									}
-									query = query + " p.ProductCondition = "+ "'" + value +"'"  + " and ";
-								}
-								
-								query = query + addAttribute+ "'" + value +"'"  + " and ";
-				        	}
-							query = query + "p.ProductYear between " + minYear + " and " + maxYear + " and ";
-							query = query + "p.Price between " + minPrice + " and " + maxPrice + " and ";
-							query = query + " s.Name = " +  "'" +subcategory+ "'";
-							System.out.println(query);
 							try {
-								
-								CachedRowSet crs = adminConnection.executeScrolResult(query);
-								while(crs.next())
-								{
-									String id = crs.getString(1);
-									String title = crs.getString(2);
-									String date = crs.getString(3);
-									String productName = crs.getString(4);
-									String sPrice = crs.getString(5);
-									double price = Double.parseDouble(sPrice);
-									
-									tmp = new AnnouncementData(id, date, productName, title, price);
-									ad.add(tmp);
-									
-									System.out.println(id + "  " + title + "  " + date + "  " + productName + "  " + price);
+								String query = "SELECT DISTINCT p.ID, a.TitleName, a.BeginDate, p.Name, p.Price from announcements as a inner join product as p on a.ProductID = p.ID "
+										+ "inner join productcategory as pc ON p.ID = pc.ProductID inner join subcategory as s on s.ID = pc.SubcategoryID left join productattribute as pa "
+										+ "ON p.ID = pa.ProductID left join attributes as att on pa.AttributeID = att.ID where ";
+								String addAttribute = "att.Value = ";
+								Set<String> keys = attributes.keySet();
+								for (String key : keys) {
+
+									String value = attributes.get(key);
+									if (key.equals("cena od")) {
+										minPrice = Double.parseDouble(value);
+										continue;
+									} else if (key.equals("cena do")) {
+										maxPrice = Double.parseDouble(value);
+										continue;
+									} else if (key.equals("rok prod. od")) {
+										minYear = Integer.parseInt(value);
+										continue;
+									} else if (key.equals("rok prod. do")) {
+										maxYear = Integer.parseInt(value);
+										continue;
+									} else if (key.equals("stan")) {
+										if (value.equals("u¿ywany")) {
+											useProduct = "USED";
+											use = true;
+										} else {
+											use = true;
+											useProduct = "NEW";
+										}
+										query = query + " p.ProductCondition = " + "'" + value + "'" + " and ";
+									}
+
+									query = query + addAttribute + "'" + value + "'" + " and ";
 								}
-								
-								AnnDataMessage dataMessage = new AnnDataMessage();
-								dataMessage.setArrayAD(ad);
-								
-								outStream.writeObject(dataMessage);
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+								query = query + "p.ProductYear between " + minYear + " and " + maxYear + " and ";
+								query = query + "p.Price between " + minPrice + " and " + maxPrice + " and ";
+								query = query + " s.Name = " + "'" + subcategory + "'";
+								System.out.println(query);
+								try {
+
+									CachedRowSet crs = adminConnection.executeScrolResult(query);
+									while (crs.next()) {
+										String id = crs.getString(1);
+										String title = crs.getString(2);
+										String date = crs.getString(3);
+										String productName = crs.getString(4);
+										String sPrice = crs.getString(5);
+										double price = Double.parseDouble(sPrice);
+
+										tmp = new AnnouncementData(id, date, productName, title, price);
+										ad.add(tmp);
+
+										System.out.println(
+												id + "  " + title + "  " + date + "  " + productName + "  " + price);
+									}
+
+									AnnDataMessage dataMessage = new AnnDataMessage();
+									dataMessage.setArrayAD(ad);
+
+									outStream.writeObject(dataMessage);
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							} catch (NumberFormatException e) {
+								System.out.println("Z£APANO");
 							}
 						}
 						else
