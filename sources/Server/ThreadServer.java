@@ -421,6 +421,8 @@ public class ThreadServer implements Runnable {
 						String subcategory = showProduct.getSubcategory();
 						int minYear = Integer.MIN_VALUE;
 						int maxYear = Integer.MAX_VALUE;
+						Boolean use = false;
+						String useProduct = "";
 						double minPrice = Double.MIN_VALUE;
 						double maxPrice = Double.MAX_VALUE;
 						
@@ -429,9 +431,10 @@ public class ThreadServer implements Runnable {
 						
 						if(attributes != null)
 						{
-							String query = "SELECT p.ID, a.TitleName, a.BeginDate, p.Name, p.Price from announcements as a inner join product as p on a.ProductID = p.ID " +  
-										"inner join productcategory as pc ON p.ID = pc.ProductID inner join subcategory as s on s.ID = pc.SubcategoryID inner join productattribute as pa " +
-										"ON p.ID = pa.ProductID inner JOIN attributes as att on pa.AttributeID = att.ID where ";
+							
+							String query = "SELECT DISTINCT p.ID, a.TitleName, a.BeginDate, p.Name, p.Price from announcements as a inner join product as p on a.ProductID = p.ID " +  
+										"inner join productcategory as pc ON p.ID = pc.ProductID inner join subcategory as s on s.ID = pc.SubcategoryID left join productattribute as pa " +
+										"ON p.ID = pa.ProductID left join attributes as att on pa.AttributeID = att.ID where ";
 							String addAttribute = "att.Value = ";
 							Set<String> keys = attributes.keySet();
 							for(String key : keys)
@@ -458,6 +461,20 @@ public class ThreadServer implements Runnable {
 									maxYear = Integer.parseInt(value);
 									continue;
 								}
+								else if(key.equals("stan"))
+								{
+									if(value.equals("u¿ywany"))
+									{
+										useProduct  = "USED";
+										use = true;
+									}
+									else {
+										use = true;
+										useProduct = "NEW";
+									}
+									query = query + " p.ProductCondition = "+ "'" + value +"'"  + " and ";
+								}
+								
 								query = query + addAttribute+ "'" + value +"'"  + " and ";
 				        	}
 							query = query + "p.ProductYear between " + minYear + " and " + maxYear + " and ";
@@ -553,14 +570,14 @@ public class ThreadServer implements Runnable {
 								attributes.put("Stan", condition);
 								
 								query = "Select p.ID, att.Name, att.Value from product as p inner join productattribute as pa on p.ID = pa.ProductID " +
-										 "inner join attributes as att on pa.AttributeID = att.ID";
+										 "inner join attributes as att on pa.AttributeID = att.ID where p.ID =  " + id;
 								
 								CachedRowSet crs2 = adminConnection.executeScrolResult(query);
-								while(crs.next())
+								while(crs2.next())
 								{
 
-									String attName = crs.getString(2);
-									String attValue = crs.getString(3);
+									String attName = crs2.getString(2);
+									String attValue = crs2.getString(3);
 									attributes.put(attName, attValue);
 								}
 								Announcement tmp = new Announcement(productName, title, category, subcategory, attributes, destription);
