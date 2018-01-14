@@ -24,6 +24,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -170,6 +171,7 @@ public class MainWindowController {
 //		return FXCollections.observableArrayList(new ArrayList(new AnnouncementInfo(date, productName, title, price)))
 //	}
 
+	@SuppressWarnings("unchecked")
 	@FXML
 	private void initialize() {
 		
@@ -189,6 +191,17 @@ public class MainWindowController {
 		categoryBox.getItems().setAll(FXCollections.observableArrayList(getCategories()));
 		conditionBox.getItems().setAll(FXCollections.observableArrayList(getCondition()));
 		
+		announcementsTable.setRowFactory(tv -> {
+			TableRow<AnnouncementInfo> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					AnnouncementInfo rowData = row.getItem();
+					System.out.println(rowData.getTitle());
+					showAnnouncement(rowData);
+				}
+			});
+			return row;
+		});
 		dateColumn.setCellValueFactory(cellData -> cellData.getValue().startDateProperty());
 		productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productNameProperty());
 		titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
@@ -214,6 +227,30 @@ public class MainWindowController {
 			
 		}
 		
+	}
+	
+	void showAnnouncement(AnnouncementInfo info) {
+		
+		
+		Stage stage = (Stage) myAccountButton.getScene().getWindow();
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowAnnouncementWindow.fxml"));
+		
+		try {
+			Scene scene = new Scene((Pane) loader.load());
+			stage.setScene(scene);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		ShowAnnouncementWindowController controller = loader.<ShowAnnouncementWindowController>getController();
+		controller.setAnnouncement(getAnnouncement(info));
+		stage.show();
+	}
+	
+	Announcement getAnnouncement(AnnouncementInfo info) {
+		//pobieranie ogłoszenia z bazy
+		return new Announcement(info.getProductName(), info.getTitle(), "TMP cat", "TMP subcat", null, "SAGDGDSGS");
 	}
 	
 	private ObservableList<AnnouncementInfo> announcementsList;

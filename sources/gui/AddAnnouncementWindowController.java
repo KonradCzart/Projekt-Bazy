@@ -74,6 +74,7 @@ public class AddAnnouncementWindowController {
 	        	
 	        	try {
 					client.sendMessage(newAnnouncement);
+					clearAnnouncement();
 				} catch (IOException e) {
 					System.out.println("Nie wys³ano!");
 					e.printStackTrace();
@@ -83,6 +84,15 @@ public class AddAnnouncementWindowController {
 	        else
 	        	System.out.println("Nie wszystkie argumenty!");
 		}
+	}
+	
+	void clearAnnouncement() {
+		titleField.clear();
+		productName.clear();
+		categoryBox.getSelectionModel().clearSelection();
+		subcategoryBox.getSelectionModel().clearSelection();
+		attributesGrid.getChildren().clear();
+		descriptionTextArea.clear();
 	}
 
 	@FXML
