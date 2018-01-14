@@ -1,6 +1,7 @@
 package gui;
 import java.io.IOException;
 
+import DataBase.AccountsStatus;
 import DataBase.PasswordHash;
 import Message.*;
 import client.Client;
@@ -13,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -20,6 +22,7 @@ public class MySettingsWindowController {
 	
 	private Client client;
 	private String oldSalt;
+	private AccountsStatus accountStatus;
 	
 	public MySettingsWindowController ()
 	{
@@ -65,6 +68,34 @@ public class MySettingsWindowController {
 	
 	@FXML
 	private Button announcementsButton;
+	
+	@FXML
+	private TitledPane backupRestoreSection;
+	
+	@FXML
+	private Button makeBackup;
+	
+	@FXML
+	private void makeBackupActivated(ActionEvent event) {
+		
+	}
+	
+	@FXML
+	private Button restoreDatabase;
+	
+	@FXML
+	private void restoreDatabaseActivated(ActionEvent event) {
+		
+	}
+	
+	@FXML
+	private void initialize() {
+		accountStatus = AccountsStatus.USER;
+		if(accountStatus != AccountsStatus.ADMIN) {
+			backupRestoreSection.setCollapsible(false);
+			backupRestoreSection.setText("");
+		}
+	}
 
 	@FXML
 	void announcementsButtonActivated(ActionEvent event) {

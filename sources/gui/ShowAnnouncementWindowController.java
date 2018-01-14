@@ -3,7 +3,9 @@ package gui;
 import java.io.IOException;
 import java.util.Map;
 
+import DataBase.AccountsStatus;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,11 +19,13 @@ import javafx.stage.Stage;
 
 public class ShowAnnouncementWindowController {
 	Announcement announcement;
+	AccountsStatus accountStatus;
 	
 	void setAnnouncement(Announcement announcement) {
 		this.announcement = announcement;
 		fillFormsWithData();
 	}
+	
 	
 	@FXML
 	private Button mainPage;
@@ -63,7 +67,22 @@ public class ShowAnnouncementWindowController {
 	private TextArea descriptionTextArea;
 	
 	@FXML
+	private Button editButton;
+	
+	@FXML
 	private void initialize() {
+		accountStatus = AccountsStatus.USER;
+		if(accountStatus == AccountsStatus.MOD || accountStatus == AccountsStatus.ADMIN) {
+			editButton.setDisable(false);
+			editButton.setText("Edytuj");
+		}
+		else {
+			editButton.setDisable(true);
+		}
+	}
+	
+	@FXML
+	private void editButonActivated(ActionEvent event) {
 		
 	}
 	
@@ -88,6 +107,7 @@ public class ShowAnnouncementWindowController {
 			tf = new TextField();
 			tf.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			tf.setText(a.getValue());
+			tf.setEditable(false);
 			
 			attributesGrid.add(lb, i, 0);
 			attributesGrid.add(tf, i, 1);
