@@ -45,7 +45,10 @@ public class AnnouncementInfo {
 	}
 	
 	public void setStartDate(String date) {
-		startDate.set(Date.valueOf(date));
+		if(date != null) 
+			startDate.set(Date.valueOf(date));
+		else
+			startDate = null;
 	}
 	
 	public String getProductName() {

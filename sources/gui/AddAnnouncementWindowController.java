@@ -61,7 +61,7 @@ public class AddAnnouncementWindowController {
 			String subcategory = subcategoryBox.getValue();
 	        attributes = getAttributes();
 	        if(attributes != null) {
-	        	//newAnnouncement = new Announcement(new AnnouncementInfo(null, product, title, -1), category, subcategory, attributes, description);
+	        	newAnnouncement = new Announcement(new AnnouncementInfo(null, product, title, -1), category, subcategory, attributes, description);
 	        	//DATA I CENA NULLAMI
 	        	
 	        	for(Map.Entry<String, String> tmp : attributes.entrySet())
