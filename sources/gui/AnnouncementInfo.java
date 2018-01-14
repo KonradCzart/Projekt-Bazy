@@ -14,6 +14,7 @@ public class AnnouncementInfo implements Message{
 	 * 
 	 */
 	private static final long serialVersionUID = -3433820180281149593L;
+	private String ID;
 	private SimpleObjectProperty<Date> startDate;
 	private StringProperty productName;
 	private StringProperty title;
@@ -26,7 +27,8 @@ public class AnnouncementInfo implements Message{
 		price = new SimpleDoubleProperty();
 	}
 	
-	public AnnouncementInfo(String date, String productName, String title, double price) {
+	public AnnouncementInfo(String ID, String date, String productName, String title, double price) {
+		this.ID = ID;
 		this.startDate = new SimpleObjectProperty<>();
 		this.productName = new SimpleStringProperty();
 		this.title = new SimpleStringProperty();
@@ -35,6 +37,14 @@ public class AnnouncementInfo implements Message{
 		setProductName(productName);
 		setTitle(title);
 		setPrice(price);
+	}
+	
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 	
 	public Object getStartDate() {

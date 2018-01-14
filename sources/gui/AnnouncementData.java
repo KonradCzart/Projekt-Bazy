@@ -27,6 +27,10 @@ public class AnnouncementData implements Message{
 		return date;
 	}
 	
+	String getID() {
+		return id;
+	}
+	
 	public String getProductName() {
 		return productName;
 	}
