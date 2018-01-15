@@ -543,8 +543,16 @@ public class ThreadServer implements Runnable {
 						String query = "SELECT p.ID, a.TitleName,  p.Name, s.Name, c.Name, p.Price, p.Description, p.ProductCondition, p.ProductYear from announcements as a inner join product as p on a.ProductID = p.ID " +
 							"inner join productcategory as pc ON p.ID = pc.ProductID inner join subcategory as s on s.ID = pc.SubcategoryID inner join " +
 								"category as c on s.ParentCategory = c.ID where p.ID = " + id;
+						
+						String query2 = "Select PhoneNumber from users as u inner join announcements as a on u.UserName=a.UserName where a.ProductID =  ?";
+						
+						
 					
 						try {
+							PreparedStatement prs = adminConnection.createOnePreparedStatement(query2, id);
+							String phone = adminConnection.executeOneString(prs);
+							
+							
 							CachedRowSet crs = adminConnection.executeScrolResult(query);
 							
 							if(crs.next())
@@ -562,6 +570,9 @@ public class ThreadServer implements Runnable {
 								if(!year.equals("0"))
 									attributes.put("Rok", year);
 								
+								if(phone != null)
+									attributes.put("Telefon", phone);
+									
 								attributes.put("Cena", sPrice);
 								attributes.put("Stan", condition);
 								
