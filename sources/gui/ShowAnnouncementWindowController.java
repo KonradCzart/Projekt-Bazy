@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Map;
 
 import DataBase.AccountsStatus;
+import Message.DeleteMessage;
+import client.Client;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +22,13 @@ import javafx.stage.Stage;
 public class ShowAnnouncementWindowController {
 	Announcement announcement;
 	AccountsStatus accountStatus;
+	private Client client;
+	
+	public ShowAnnouncementWindowController()
+	{
+		this.client = Window.client;
+		client.setShowWindow(this);
+	}
 	
 	void setAnnouncement(Announcement announcement) {
 		this.announcement = announcement;
@@ -71,10 +80,12 @@ public class ShowAnnouncementWindowController {
 	
 	@FXML
 	private void initialize() {
-		accountStatus = AccountsStatus.USER;
+		
+		accountStatus = client.getAccountStatus();
+		System.out.println(accountStatus);
 		if(accountStatus == AccountsStatus.MOD || accountStatus == AccountsStatus.ADMIN) {
 			editButton.setDisable(false);
-			editButton.setText("Edytuj");
+			editButton.setText("Usuñ og³oszenie");
 		}
 		else {
 			editButton.setDisable(true);
@@ -84,6 +95,16 @@ public class ShowAnnouncementWindowController {
 	@FXML
 	private void editButonActivated(ActionEvent event) {
 		
+		String idProduct = announcement.getId();
+		DeleteMessage delete = new DeleteMessage(idProduct);
+		
+		try {
+			client.sendMessage(delete);
+		} catch (IOException e) {
+			System.out.println("nie wys³ano");
+		}
+		
+		this.mainPageActivated(event);
 	}
 	
 	void fillFormsWithData() {

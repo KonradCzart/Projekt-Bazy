@@ -577,6 +577,7 @@ public class ThreadServer implements Runnable {
 									attributes.put(attName, attValue);
 								}
 								Announcement tmp = new Announcement(productName, title, category, subcategory, attributes, destription);
+								tmp.setId(id);
 								outStream.writeObject(tmp);
 							}
 						} catch (SQLException e) {
@@ -584,6 +585,19 @@ public class ThreadServer implements Runnable {
 							e.printStackTrace();
 						}
 						
+					}
+					else if(objectMessage instanceof DeleteMessage)
+					{
+						DeleteMessage delete = (DeleteMessage) objectMessage;
+						String idS = delete.getId();
+						int id = Integer.parseInt(idS);
+						
+						try {
+							adminConnection.deleteConcretProdact(id);
+						} catch (SQLException e) {
+							System.out.println("nie usune³o");
+							e.printStackTrace();
+						}
 					}
 					//To dooooooooooooooooo
 				}

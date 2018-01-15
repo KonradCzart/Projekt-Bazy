@@ -306,8 +306,13 @@ public class DataBaseConnection
 		stmt.setInt(2, idAttribute);
 		
 		stmt.execute();
-
 		
-		
+	}
+	
+	public void deleteConcretProdact(int idProduct) throws SQLException
+	{
+		CallableStatement stmt= myConnection.prepareCall ("{call DeleteConcretProduct(?)}");
+		stmt.setInt(1, idProduct);       
+	    stmt.executeQuery();
 	}
 }

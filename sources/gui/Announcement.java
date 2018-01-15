@@ -10,7 +10,7 @@ public class Announcement implements Message{
 
 	private static final long serialVersionUID = -3597330109539745391L;
 	
-	
+	String id;
 	String category;
 	String subcategory;
 	Map<String, String> attributes;
@@ -20,6 +20,7 @@ public class Announcement implements Message{
 	
 	public Announcement( String productName, String title, String category, String subcategory, Map<String, String> attributes, String description) 
 	{
+		this.id = "";
 		this.productName = productName;
 		this.title = title;
 		this.category = category;
@@ -81,4 +82,14 @@ public class Announcement implements Message{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
 }

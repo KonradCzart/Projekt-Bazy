@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import DataBase.AccountsStatus;
 import Message.*;
 import gui.*;
 
@@ -23,7 +25,8 @@ public class Client
 	private SignInOrRegisterController registerWindow;
 	private SignInOrRegisterController2 registerToBasaWindow;
 	private AddAnnouncementWindowController addAnnouncementWindow;
-
+	private AccountsStatus accountStatus;
+	private ShowAnnouncementWindowController showWindow;
 
 	private static final int DEFAULT_PORT = 8189;
 	private static final String DEFAULT_HOSTNAME = "localhost";
@@ -32,12 +35,14 @@ public class Client
 	{
 		localhost = DEFAULT_HOSTNAME;
 		port = DEFAULT_PORT;
+		accountStatus = AccountsStatus.USER;
 	}
 
 	public Client(String localhost, int adress)
 	{
 		this.localhost = localhost;
 		this.port = adress;
+		accountStatus = AccountsStatus.USER;
 	}
 	public void connectServer() throws UnknownHostException, IOException
 	{
@@ -57,6 +62,17 @@ public class Client
 	public void sendMessage(Message newMessage) throws IOException
 	{
 		outStream.writeObject(newMessage);
+	}
+
+		
+	
+	
+	public AccountsStatus getAccountStatus() {
+		return accountStatus;
+	}
+
+	public void setAccountStatus(AccountsStatus accountStatus) {
+		this.accountStatus = accountStatus;
 	}
 
 	public String getLocalhost()
@@ -117,4 +133,13 @@ public class Client
 	public void setRegisterToBasaWindow(SignInOrRegisterController2 registerToBasaWindow) {
 		this.registerToBasaWindow = registerToBasaWindow;
 	}
+
+	public ShowAnnouncementWindowController getShowWindow() {
+		return showWindow;
+	}
+
+	public void setShowWindow(ShowAnnouncementWindowController showWindow) {
+		this.showWindow = showWindow;
+	}
+	
 }

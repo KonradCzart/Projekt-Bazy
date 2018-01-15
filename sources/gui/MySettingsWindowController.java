@@ -241,6 +241,7 @@ public class MySettingsWindowController {
 		userSurnameField.setText(lastName);
 		this.oldSalt = salt;
 		accountStatus = status;
+		client.setAccountStatus(status);
 		if(accountStatus != AccountsStatus.ADMIN) {
 			backupRestoreSection.setCollapsible(false);
 			backupRestoreSection.setText("");

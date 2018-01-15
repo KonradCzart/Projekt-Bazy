@@ -106,5 +106,27 @@ END; //
 
 DELIMITER ;
 
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS DeleteConcretProduct;
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteConcretProduct (in idProduct INT)
+
+BEGIN
+
+	START TRANSACTION;
+    DELETE FROM productattribute where ProductID = idProduct;
+    DELETE FROM announcements where ProductID = idProduct;
+    DELETE FROM productcategory where ProductID = idProduct;
+    DELETE FROM product where ID = idProduct;
+    COMMIT;
+    
+END; //
+
+DELIMITER ;
+
+
 call RegisterInsert ( 'kon', '123', 'aaaaaaa', 'konrad', 'czart', 123123123);
 call InsertProduct ( 'kon','Michałówkfa', 'Sprzedfam auto osobowe' , 'aufdi b5bd', 'dasfasffasdasfasfdasda',  158545.25, 1, 1,2008, @res);
