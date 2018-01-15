@@ -1,5 +1,6 @@
 package gui;
 import java.io.IOException;
+import java.io.InputStream;
 
 import DataBase.AccountsStatus;
 import DataBase.PasswordHash;
@@ -75,17 +76,72 @@ public class MySettingsWindowController {
 	@FXML
 	private Button makeBackup;
 	
+	
+	public boolean backupDB(String dbName, String dbUserName, String dbPassword, String path) {
+		 
+        String executeCmd = "mysqldump --routines -u " + dbUserName + " -p" + dbPassword + " --add-drop-database -B " + dbName + path;
+        Process runtimeProcess;
+        try {
+ 
+            runtimeProcess = Runtime.getRuntime().exec(new String[]{"cmd.exe","/c", executeCmd});
+            int processComplete = runtimeProcess.waitFor();
+ 
+            if (processComplete == 0) {
+                successBackupRestore("Stworzono backup");
+                return true;
+            } else {
+                errorBackupRestore("Nie uda³o siê stworzyæ backupu");
+                InputStream errorStream = runtimeProcess.getErrorStream();
+                byte[] buffer = new byte[errorStream.available()];
+                errorStream.read(buffer);
+
+                String str = new String(buffer);
+                System.out.println(str);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+ 
+        return false;
+    }
+	
+	
 	@FXML
 	private void makeBackupActivated(ActionEvent event) {
-		
+		backupDB("czaki", "admin", "admin123", " > plik.sql");
 	}
 	
 	@FXML
 	private Button restoreDatabase;
 	
+	
+	public boolean restoreDB(String dbUserName, String dbPassword, String source) {
+		 
+        String[] executeCmd = new String[]{"cmd.exe","/c","mysql", "--user=" + dbUserName, "--password=" + dbPassword, "-e", "source "+source};
+ 
+        Process runtimeProcess;
+        try {
+ 
+            runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+            int processComplete = runtimeProcess.waitFor();
+ 
+            if (processComplete == 0) {
+                successBackupRestore("Przywrócono bazê");
+                return true;
+            } else {
+            	errorBackupRestore("Nie uda³o siê przywróciæ");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+ 
+        return false;
+    }
+	
+	
 	@FXML
 	private void restoreDatabaseActivated(ActionEvent event) {
-		
+		restoreDB("admin", "admin123", "plik.sql");
 	}
 	
 	@FXML
@@ -210,6 +266,32 @@ public class MySettingsWindowController {
 		this.newPasswordField2.setText("");
 		this.currentPasswordField.setText("");
 		
+		Platform.runLater(() -> {
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Success");
+			alert.setHeaderText("");
+			alert.setContentText(successMessage);
+
+			alert.showAndWait();
+		});
+
+	}
+	
+	public void errorBackupRestore(String errorMessage)
+	{
+		Platform.runLater(() -> {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("");
+			alert.setContentText(errorMessage);
+
+			alert.showAndWait();
+		});
+	}
+	
+	public void successBackupRestore(String successMessage)
+	{
 		Platform.runLater(() -> {
 
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
