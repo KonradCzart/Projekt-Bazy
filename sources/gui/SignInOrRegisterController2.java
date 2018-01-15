@@ -124,8 +124,6 @@ public class SignInOrRegisterController2 {
 			
 			try {
 				client.sendMessage(register);
-				logInButton.setText("");
-				registerMeButton.setText("");
 				nameField.setText("");
 				surnameField.setText("");
 				phoneNumberField.setText("");
@@ -160,5 +158,19 @@ public class SignInOrRegisterController2 {
 
 			alert.showAndWait();
 		});
+	}
+	public void successDialogListener(String successMessage)
+	{
+
+		Platform.runLater(() -> {
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Success");
+			alert.setHeaderText("");
+			alert.setContentText(successMessage);
+
+			alert.showAndWait();
+		});
+
 	}
 }

@@ -295,6 +295,8 @@ public class ThreadServer implements Runnable {
 							if(tmpB)
 							{
 								adminConnection.registerInsert(login, hashPassword, salt, firstName, lastName, number);
+								SuccessMessage success = new SuccessMessage(4, "Udana rejestracja teraz mo¿esz siê zalogowaæ!");
+								outStream.writeObject(success);
 							}
 							else
 							{
@@ -302,8 +304,8 @@ public class ThreadServer implements Runnable {
 								outStream.writeObject(fail);
 							}
 						} catch (SQLException e) {
-							e.printStackTrace();
-							
+							FailMessage fail = new FailMessage(4, "Niepoprawne dane!");
+							outStream.writeObject(fail);
 						}
 						
 					}

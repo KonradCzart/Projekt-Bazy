@@ -29,8 +29,18 @@ DELIMITER //
 CREATE PROCEDURE RegisterInsert ( in login VARCHAR(30) , in pasword VARCHAR(128) , in salt VARCHAR(128), in name VARCHAR(30), lastname VARCHAR(45), in number INT )
 
 BEGIN
+
+	DECLARE CONTINUE HANDLER FOR SQLSTATE '55555'
+	BEGIN
+		ROLLBACK;
+        SIGNAL SQLSTATE '11111'
+        SET MESSAGE_TEXT = 'przerwano procedure';
+	END;
+	 -- SET autocommit = 0;
+    START TRANSACTION;
 	INSERT INTO logdata VALUES (login, pasword, salt);
     INSERT INTO users VALUES (login, name, lastname, 3, number);
+    COMMIT;
 END; //
 
 DELIMITER ;
@@ -47,8 +57,10 @@ BEGIN
     SELECT PasswordHash INTO oldPassword FROM  logdata WHERE UserName = login;
     
 	IF oldPassword = pasword THEN
+	  START TRANSACTION;
       UPDATE logdata SET PasswordHash = newpasword WHERE UserName = login;
       UPDATE logdata SET PasswordSalt = salt WHERE UserName = login;
+      COMMIT;
    ELSE
 		SIGNAL SQLSTATE '55555'
         SET MESSAGE_TEXT = '11111';
@@ -71,11 +83,13 @@ BEGIN
     SET sDate = current_date();
     SET eDate = date_add(sDate , INTERVAL 14 DAY);
 	
+    START TRANSACTION;
     INSERT INTO product(Name, Price, ProductYear, ProductCondition, Description) VALUES	( productName, priceProduct, yearP, useStatus, descriptionProduct);
     SET idProduct = LAST_INSERT_ID();
     INSERT INTO productcategory ( ProductID, SubcategoryID) VALUES ( idProduct, subcategoryI);
     INSERT INTO announcements ( ProductID, TitleName, UserName, Location, BeginDate, EndDate, Status) VALUES (idProduct, title, login,   locationP, sDate, eDate, 1);
     SET res = idProduct;
+    COMMIT;
 END; //
 
 DELIMITER ;
@@ -91,5 +105,6 @@ BEGIN
 END; //
 
 DELIMITER ;
+
 call RegisterInsert ( 'kon', '123', 'aaaaaaa', 'konrad', 'czart', 123123123);
- call InsertProduct ( 'kon','Michałówkfa', 'Sprzedfam auto osobowe' , 'aufdi b5bd', 'dasfasffasdasfasfdasda',  158545.25, 1, 1,2008, @res);
+call InsertProduct ( 'kon','Michałówkfa', 'Sprzedfam auto osobowe' , 'aufdi b5bd', 'dasfasffasdasfasfdasda',  158545.25, 1, 1,2008, @res);

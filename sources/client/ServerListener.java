@@ -85,12 +85,17 @@ public class ServerListener implements Runnable
 					int successCode = success.getCodSuccess();
 					String dectription = success.getDescription();
 					
-					if(successCode == 5)
+					if(successCode == 4)
+					{
+						String salt = success.getDescription2();
+						myClient.getRegisterToBasaWindow().successDialogListener(dectription);
+					}
+					else if(successCode == 5)
 					{
 						String salt = success.getDescription2();
 						myClient.getSettingWindow().successDialogListener(dectription, salt);
 					}
-					if(successCode == 6)
+					else if(successCode == 6)
 					{
 						myClient.getAddAnnouncementWindow().successDialogListener(dectription);
 					}
