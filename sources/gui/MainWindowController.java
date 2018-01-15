@@ -686,10 +686,10 @@ public class MainWindowController {
 			TextField maxYear = new TextField();
 			maxYear.setPromptText("rok wyd. do");
 			maxYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-			
+		/*	
 			TextField author = new TextField();
 			author.setPromptText("autor");
-			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);*/
 			
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
@@ -698,7 +698,7 @@ public class MainWindowController {
 			attributesGrid.add(conditionBox, 1, 1);
 			attributesGrid.add(minYear, 2, 0);
 			attributesGrid.add(maxYear, 2, 1);
-			attributesGrid.add(author, 3, 0);
+			//attributesGrid.add(author, 3, 0);
 			
 		}
 		else if(subcategory.equals("Naukowe")) {
@@ -711,17 +711,17 @@ public class MainWindowController {
 			maxYear.setPromptText("rok wyd. do");
 			maxYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
-			TextField author = new TextField();
+		/*	TextField author = new TextField();
 			author.setPromptText("autor");
-			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);*/
 			
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
-			attributesGrid.add(author, 1, 0);
-			attributesGrid.add(conditionBox, 1, 1);
-			attributesGrid.add(minYear, 2, 0);
-			attributesGrid.add(maxYear, 2, 1);
+			//attributesGrid.add(author, 1, 0);
+			attributesGrid.add(conditionBox, 0, 2);
+			attributesGrid.add(minYear, 1, 0);
+			attributesGrid.add(maxYear, 1, 1);
 			
 		}
 		else if(subcategory.equals("Literatura")) {
@@ -734,17 +734,17 @@ public class MainWindowController {
 			maxYear.setPromptText("rok wyd. do");
 			maxYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
-			TextField author = new TextField();
+			/*TextField author = new TextField();
 			author.setPromptText("autor");
-			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);*/
 			
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
-			attributesGrid.add(author, 1, 0);
-			attributesGrid.add(conditionBox, 1, 1);
-			attributesGrid.add(minYear, 2, 0);
-			attributesGrid.add(maxYear, 2, 1);
+			//attributesGrid.add(author, 1, 0);
+			attributesGrid.add(conditionBox, 0, 2);
+			attributesGrid.add(minYear, 1, 0);
+			attributesGrid.add(maxYear, 1, 1);
 		}
 		else if(subcategory.equals("Czasopisma")) {
 			
@@ -761,15 +761,15 @@ public class MainWindowController {
 			maxYear.setPromptText("rok wyd. do");
 			maxYear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			
-			TextField author = new TextField();
+			/*TextField author = new TextField();
 			author.setPromptText("autor");
-			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);*/
 			
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(minPrice, 0, 0);
 			attributesGrid.add(maxPrice, 0, 1);
-			attributesGrid.add(conditionBox, 0, 2);
-			attributesGrid.add(author, 1, 0);
+			attributesGrid.add(conditionBox, 1, 0);
+			//attributesGrid.add(author, 1, 0);
 			attributesGrid.add(magazineTypesBox, 1, 1);
 			attributesGrid.add(minYear, 2, 0);
 			attributesGrid.add(maxYear, 2, 1);

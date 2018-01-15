@@ -406,16 +406,16 @@ public class AddAnnouncementWindowController {
 			year.setPromptText("rok wydania");
 			year.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-			TextField author = new TextField();
+			/*TextField author = new TextField();
 			author.setPromptText("autor");
-			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);*/
 
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(price, 0, 0);
 			attributesGrid.add(conditionBox, 0, 1);
 			attributesGrid.add(languagesBox, 1, 0);
-			attributesGrid.add(author, 1, 1);
-			attributesGrid.add(year, 2, 0);
+			//attributesGrid.add(author, 1, 1);
+			attributesGrid.add(year, 1, 0);
 
 		} else if (subcategory.equals("Naukowe")) {
 
@@ -423,15 +423,15 @@ public class AddAnnouncementWindowController {
 			year.setPromptText("rok wydania");
 			year.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-			TextField author = new TextField();
+			/*TextField author = new TextField();
 			author.setPromptText("autor");
-			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);*/
 
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(price, 0, 0);
 			attributesGrid.add(conditionBox, 0, 1);
 			attributesGrid.add(year, 1, 0);
-			attributesGrid.add(author, 1, 1);
+			//attributesGrid.add(author, 1, 1);
 
 		} else if (subcategory.equals("Literatura")) {
 
@@ -439,15 +439,15 @@ public class AddAnnouncementWindowController {
 			year.setPromptText("rok wydania");
 			year.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-			TextField author = new TextField();
+			/*TextField author = new TextField();
 			author.setPromptText("autor");
-			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);*/
 
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(price, 0, 0);
 			attributesGrid.add(conditionBox, 0, 1);
 			attributesGrid.add(year, 1, 0);
-			attributesGrid.add(author, 1, 1);
+			//attributesGrid.add(author, 1, 1);
 		} else if (subcategory.equals("Czasopisma")) {
 
 			ComboBox<String> magazineTypesBox = new ComboBox<>();
@@ -459,16 +459,16 @@ public class AddAnnouncementWindowController {
 			year.setPromptText("rok wydania");
 			year.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-			TextField author = new TextField();
+			/*TextField author = new TextField();
 			author.setPromptText("autor");
-			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+			author.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);*/
 
 			attributesGrid.getChildren().clear();
 			attributesGrid.add(price, 0, 0);
 			attributesGrid.add(conditionBox, 0, 1);
-			attributesGrid.add(author, 1, 0);
-			attributesGrid.add(magazineTypesBox, 1, 1);
-			attributesGrid.add(year, 2, 0);
+			//attributesGrid.add(author, 1, 0);
+			attributesGrid.add(magazineTypesBox, 1, 0);
+			attributesGrid.add(year, 1, 1);
 		} else if (subcategory.equals("Dzia³ki")) {
 
 			ComboBox<String> transactionType = new ComboBox<>();
