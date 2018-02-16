@@ -457,18 +457,28 @@ public class ThreadServer implements Runnable {
 									} else if (key.equals("rok prod. do")) {
 										maxYear = Integer.parseInt(value);
 										continue;
-									} else if (key.equals("stan")) {
-										if (value.equals("u¿ywany")) {
-											useProduct = "USED";
-											use = true;
-										} else {
-											use = true;
-											useProduct = "NEW";
-										}
-										query = query + " p.ProductCondition = " + "'" + value + "'" + " and ";
 									}
-
-									query = query + addAttribute + "'" + value + "'" + " and ";
+								
+									if (value.equals("u¿ywany")) 
+									{
+										useProduct = "USED";
+										use = true;
+										query = query + " p.ProductCondition = " + "'" + useProduct + "'" + " and ";
+										continue;
+									} else if(value.equals("dowolny"))
+									{	
+										continue;
+									} else if(value.equals("nowy")){
+										use = true;
+										useProduct = "NEW";
+										query = query + " p.ProductCondition = " + "'" + useProduct + "'" + " and ";
+										continue;
+									}
+									else {
+										
+										query = query + addAttribute + "'" + value + "'" + " and ";
+									}
+									
 								}
 								query = query + "p.ProductYear between " + minYear + " and " + maxYear + " and ";
 								query = query + "p.Price between " + minPrice + " and " + maxPrice + " and ";
@@ -500,7 +510,9 @@ public class ThreadServer implements Runnable {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
-							} catch (NumberFormatException e) {
+								
+								}
+							catch (NumberFormatException e) {
 								System.out.println("Z£APANO");
 							}
 						}
