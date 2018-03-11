@@ -457,18 +457,28 @@ public class ThreadServer implements Runnable {
 									} else if (key.equals("rok prod. do")) {
 										maxYear = Integer.parseInt(value);
 										continue;
-									} else if (key.equals("stan")) {
-										if (value.equals("u¿ywany")) {
-											useProduct = "USED";
-											use = true;
-										} else {
-											use = true;
-											useProduct = "NEW";
-										}
-										query = query + " p.ProductCondition = " + "'" + value + "'" + " and ";
 									}
-
-									query = query + addAttribute + "'" + value + "'" + " and ";
+								
+									if (value.equals("u¿ywany")) 
+									{
+										useProduct = "USED";
+										use = true;
+										query = query + " p.ProductCondition = " + "'" + useProduct + "'" + " and ";
+										continue;
+									} else if(value.equals("dowolny"))
+									{	
+										continue;
+									} else if(value.equals("nowy")){
+										use = true;
+										useProduct = "NEW";
+										query = query + " p.ProductCondition = " + "'" + useProduct + "'" + " and ";
+										continue;
+									}
+									else {
+										
+										query = query + addAttribute + "'" + value + "'" + " and ";
+									}
+									
 								}
 								query = query + "p.ProductYear between " + minYear + " and " + maxYear + " and ";
 								query = query + "p.Price between " + minPrice + " and " + maxPrice + " and ";
@@ -500,7 +510,9 @@ public class ThreadServer implements Runnable {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
-							} catch (NumberFormatException e) {
+								
+								}
+							catch (NumberFormatException e) {
 								System.out.println("Z£APANO");
 							}
 						}
@@ -543,8 +555,16 @@ public class ThreadServer implements Runnable {
 						String query = "SELECT p.ID, a.TitleName,  p.Name, s.Name, c.Name, p.Price, p.Description, p.ProductCondition, p.ProductYear from announcements as a inner join product as p on a.ProductID = p.ID " +
 							"inner join productcategory as pc ON p.ID = pc.ProductID inner join subcategory as s on s.ID = pc.SubcategoryID inner join " +
 								"category as c on s.ParentCategory = c.ID where p.ID = " + id;
+						
+						String query2 = "Select PhoneNumber from users as u inner join announcements as a on u.UserName=a.UserName where a.ProductID =  ?";
+						
+						
 					
 						try {
+							PreparedStatement prs = adminConnection.createOnePreparedStatement(query2, id);
+							String phone = adminConnection.executeOneString(prs);
+							
+							
 							CachedRowSet crs = adminConnection.executeScrolResult(query);
 							
 							if(crs.next())
@@ -562,6 +582,9 @@ public class ThreadServer implements Runnable {
 								if(!year.equals("0"))
 									attributes.put("Rok", year);
 								
+								if(phone != null)
+									attributes.put("Telefon", phone);
+									
 								attributes.put("Cena", sPrice);
 								attributes.put("Stan", condition);
 								
